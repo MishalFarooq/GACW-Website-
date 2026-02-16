@@ -1,0 +1,91 @@
+/* --- Global Reset --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body { overflow-x: hidden; width: 100%; }
+
+/* --- Navbar Styling --- */
+.navbar-main {
+  background: white;
+  padding: 10px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.brand-name { font-size: 18px; font-weight: bold; color: #1a237e; }
+.brand-sub { font-size: 10px; color: #555; font-weight: 600; }
+
+.nav-links-wrapper { display: flex; gap: 20px; align-items: center; }
+.nav-item { 
+  text-decoration: none; color: #333; font-size: 13px; font-weight: 600; 
+  background: none; border: none; cursor: pointer; text-transform: uppercase;
+}
+
+.hamburger-icon { display: none; cursor: pointer; color: #1a237e; }
+
+/* Dropdown Desktop */
+.dropdown-container { position: relative; }
+.dropdown-menu-list {
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  background: white; box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  min-width: 200px; border-radius: 8px; display: flex; flex-direction: column;
+  padding: 10px 0; border: 1px solid #eee;
+}
+.dropdown-menu-list a {
+  padding: 10px 20px; text-decoration: none; color: #333; font-size: 12px; font-weight: 600;
+}
+.dropdown-menu-list a:hover { background: #f5f5f5; }
+
+/* --- Mobile Responsive Fixes --- */
+@media (max-width: 768px) {
+  .hamburger-icon { display: block; }
+  .brand-sub { display: none; }
+
+  .nav-links-wrapper {
+    position: fixed; top: 70px; left: -100%; 
+    flex-direction: column; background: white;
+    width: 100%; height: calc(100vh - 70px);
+    padding: 30px 0; transition: 0.4s ease;
+  }
+  .nav-links-wrapper.open { left: 0; }
+
+  .dropdown-menu-list {
+    position: static !important; transform: none !important;
+    box-shadow: none !important; background: #f9f9f9 !important;
+    width: 100% !important; border: none !important;
+  }
+
+  /* Hero Section */
+  .hero-title { font-size: 2.2rem !important; }
+
+  /* Notice & Cards */
+  .notice-container { flex-direction: column !important; padding: 15px !important; }
+  .mao-card { width: 190px !important; height: 190px !important; }
+}
+
+/* --- Academics Slider --- */
+.hide-scrollbar {
+  overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
+  display: flex; gap: 20px; padding: 20px 0;
+}
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+
+.mao-card {
+  background: white; width: 240px; height: 240px; border-radius: 15px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05); border: 1px solid #eee;
+  transition: 0.4s; flex-shrink: 0;
+}
+
+.admin-nav-btn {
+  background: #e91e63; color: white !important; padding: 8px 15px; border-radius: 5px; text-decoration: none;
+}

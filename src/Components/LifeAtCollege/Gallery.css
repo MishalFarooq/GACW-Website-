@@ -1,0 +1,63 @@
+.gallery-clean-wrapper {
+  width: 100%;
+  padding: 0 5%;
+  background-color: #fff;
+  position: relative;
+  z-index: 1; 
+}
+
+.clean-breadcrumb {
+  font-size: 13px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+  position: relative;
+  z-index: 9999 !important; /* Isko sab se upar rakha hai taake click ho sakay */
+}
+
+/* Black links fix */
+.breadcrumb-link, .clickable-text {
+  text-decoration: none !important;
+  color: #000 !important;
+  cursor: pointer !important;
+  pointer-events: auto !important; /* Force clicks */
+  display: inline-block;
+}
+
+.breadcrumb-link:hover, .clickable-text:hover {
+  text-decoration: underline !important;
+}
+
+.no-line-list li {
+  color: #0056b3; 
+  padding: 8px 0;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.borderless-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+}
+
+.borderless-card {
+  border: 1px solid #ddd;
+  padding: 4px;
+}
+
+.borderless-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.dark-label {
+  background: #0d1137;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}

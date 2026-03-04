@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { ChevronDown, Menu, X } from "lucide-react"; // Menu icons add kiye
+import { ChevronDown, Menu, X } from "lucide-react";
 import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Mobile menu state
+  const [isAcademicsOpen, setIsAcademicsOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const [isAdmissionsOpen, setIsAdmissionsOpen] = useState(false);
+  const [isLifeOpen, setIsLifeOpen] = useState(false); // Naya state
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const scrollToSection = (id) => {
-    setIsMobileMenuOpen(false); // Close menu on click
+    setIsMobileMenuOpen(false);
     if (location.pathname !== "/") {
       navigate("/");
       setTimeout(() => {
@@ -21,14 +24,39 @@ const Navbar = () => {
     }
   };
 
+  const aboutOptions = [
+    { name: "Why Us", path: "/about/why-us" },
+    { name: "History", path: "/about/history" },
+    { name: "Vision", path: "/about/vision-mission" },
+    { name: "Principal's Message", path: "/about/principal-message" },
+    { name: "Our Staff", path: "/about/staff" },
+    { name: "Rules & Regulations", path: "/about/rules" },
+  ];
+
   const academicsOptions = [
-    { name: "Programs", path: "/programs" },
-    { name: "Faculty", path: "/faculty" },
-    { name: "Timetable", path: "/timetable" },
-    { name: "Academic Calendar", path: "/calendar" },
-    { name: "Class Schedule", path: "/class-schedule" },
-    { name: "Examination Schedule", path: "/exams" },
-    { name: "Results", path: "/results" },
+    { name: "Programs", path: "/academics/programs" },
+    { name: "Faculty", path: "/academics/faculty" },
+    { name: "Class Schedule", path: "/academics/class-schedule" },
+    { name: "Timetable", path: "/academics/timetable" },
+    { name: "Exam Schedule", path: "/academics/exams" },
+    { name: "Results", path: "/academics/results" },
+  ];
+
+  const admissionOptions = [
+    { name: "Forms and Prospectus", path: "/admissions/forms" },
+    { name: "Application Process", path: "/admissions/process" },
+    { name: "Rules and Regulations", path: "/admissions/rules" },
+    { name: "Fee Structure", path: "/admissions/fee" },
+    { name: "Eligibility Criteria", path: "/admissions/eligibility" },
+    { name: "Apply Online", path: "/admissions/apply" },
+  ];
+
+  // LIFE AT COLLEGE OPTIONS
+  const lifeAtCollegeOptions = [
+    { name: "Facilities", path: "/life-at-college/facilities" },
+    { name: "Events", path: "/life-at-college/events" },
+    { name: "Notice Board", path: "/life-at-college/notices" },
+    { name: "Gallery", path: "/life-at-college/gallery" },
   ];
 
   return (
@@ -41,7 +69,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Hamburger Icon - Only visible on mobile via CSS */}
       <div
         className="hamburger-icon"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -49,7 +76,6 @@ const Navbar = () => {
         {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
       </div>
 
-      {/* Nav Links */}
       <div className={`nav-links-wrapper ${isMobileMenuOpen ? "open" : ""}`}>
         <Link
           to="/"
@@ -59,34 +85,30 @@ const Navbar = () => {
           HOME
         </Link>
 
-        {/* Academics Dropdown */}
+        {/* ABOUT US DROP DOWN */}
         <div
           className="dropdown-container"
-          onMouseEnter={() => setIsDropdownOpen(true)}
-          onMouseLeave={() => setIsDropdownOpen(false)}
+          onMouseEnter={() => setIsAboutOpen(true)}
+          onMouseLeave={() => setIsAboutOpen(false)}
         >
-          <button
-            style={{
-              ...btnLinkStyle,
-              display: "flex",
-              alignItems: "center",
-              gap: "4px",
-            }}
+          <Link
+            to="/about"
+            style={dropdownLinkStyle}
+            onClick={() => setIsMobileMenuOpen(false)}
           >
-            ACADEMICS <ChevronDown size={14} />
-          </button>
-
-          {isDropdownOpen && (
+            ABOUT US <ChevronDown size={14} />
+          </Link>
+          {isAboutOpen && (
             <div style={dropdownContainerStyle}>
-              {academicsOptions.map((opt) => (
+              {aboutOptions.map((opt) => (
                 <Link
                   key={opt.name}
                   to={opt.path}
+                  style={dropdownItemStyle}
                   onClick={() => {
-                    setIsDropdownOpen(false);
+                    setIsAboutOpen(false);
                     setIsMobileMenuOpen(false);
                   }}
-                  style={dropdownItemStyle}
                 >
                   {opt.name}
                 </Link>
@@ -95,9 +117,102 @@ const Navbar = () => {
           )}
         </div>
 
-        <button onClick={() => scrollToSection("events")} style={btnLinkStyle}>
-          EVENTS
-        </button>
+        {/* ACADEMICS DROP DOWN */}
+        <div
+          className="dropdown-container"
+          onMouseEnter={() => setIsAcademicsOpen(true)}
+          onMouseLeave={() => setIsAcademicsOpen(false)}
+        >
+          <Link
+            to="/academics"
+            style={dropdownLinkStyle}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            ACADEMICS <ChevronDown size={14} />
+          </Link>
+          {isAcademicsOpen && (
+            <div style={dropdownContainerStyle}>
+              {academicsOptions.map((opt) => (
+                <Link
+                  key={opt.name}
+                  to={opt.path}
+                  style={dropdownItemStyle}
+                  onClick={() => {
+                    setIsAcademicsOpen(false);
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  {opt.name}
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* ADMISSIONS DROP DOWN */}
+        <div
+          className="dropdown-container"
+          onMouseEnter={() => setIsAdmissionsOpen(true)}
+          onMouseLeave={() => setIsAdmissionsOpen(false)}
+        >
+          <Link
+            to="/admissions"
+            style={dropdownLinkStyle}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            ADMISSIONS <ChevronDown size={14} />
+          </Link>
+          {isAdmissionsOpen && (
+            <div style={dropdownContainerStyle}>
+              {admissionOptions.map((opt) => (
+                <Link
+                  key={opt.name}
+                  to={opt.path}
+                  style={dropdownItemStyle}
+                  onClick={() => {
+                    setIsAdmissionsOpen(false);
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  {opt.name}
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* LIFE AT COLLEGE DROP DOWN */}
+        <div
+          className="dropdown-container"
+          onMouseEnter={() => setIsLifeOpen(true)}
+          onMouseLeave={() => setIsLifeOpen(false)}
+        >
+          <Link
+            to="/life-at-college"
+            style={dropdownLinkStyle}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            LIFE AT COLLEGE <ChevronDown size={14} />
+          </Link>
+          {isLifeOpen && (
+            <div style={dropdownContainerStyle}>
+              {lifeAtCollegeOptions.map((opt) => (
+                <Link
+                  key={opt.name}
+                  to={opt.path}
+                  style={dropdownItemStyle}
+                  onClick={() => {
+                    setIsLifeOpen(false);
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  {opt.name}
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+
         <button onClick={() => scrollToSection("contact")} style={btnLinkStyle}>
           CONTACT US
         </button>
@@ -113,13 +228,15 @@ const Navbar = () => {
   );
 };
 
-// Existing Styles as Objects
+// --- STYLES ---
+
 const logoStyle = {
   height: "55px",
   width: "55px",
   objectFit: "contain",
   mixBlendMode: "multiply",
 };
+
 const linkStyle = {
   color: "#333",
   textDecoration: "none",
@@ -127,6 +244,14 @@ const linkStyle = {
   fontWeight: "600",
   letterSpacing: "0.5px",
 };
+
+const dropdownLinkStyle = {
+  ...linkStyle,
+  display: "flex",
+  alignItems: "center",
+  gap: "4px",
+};
+
 const btnLinkStyle = {
   ...linkStyle,
   background: "none",
@@ -135,27 +260,32 @@ const btnLinkStyle = {
   padding: 0,
   textTransform: "uppercase",
 };
+
 const dropdownContainerStyle = {
   position: "absolute",
   top: "100%",
   left: "0",
   backgroundColor: "#ffffff",
   boxShadow: "0 8px 16px rgba(0,0,0,0.1)",
-  borderRadius: "8px",
-  padding: "10px 0",
-  minWidth: "200px",
+  borderRadius: "2px",
+  padding: "5px 0",
+  minWidth: "230px",
   display: "flex",
   flexDirection: "column",
-  border: "1px solid #eee",
+  border: "1px solid #ddd",
   zIndex: 1100,
 };
+
 const dropdownItemStyle = {
-  padding: "10px 20px",
+  padding: "12px 20px",
   textDecoration: "none",
   fontSize: "12px",
   fontWeight: "600",
   color: "#333",
   textTransform: "uppercase",
+  display: "block",
+  borderBottom: "1px solid #f1f1f1",
+  transition: "all 0.2s ease",
 };
 
 export default Navbar;

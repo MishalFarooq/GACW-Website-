@@ -1,59 +1,43 @@
 import React, { useState } from "react";
-// Breadcrumbs import add kiya
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const Programs = () => {
   const [view, setView] = useState("main");
 
-  // Breadcrumbs component common rakha hai taake har view (Main, Inter, ADP) mein nazar aaye
-  const programBreadcrumbs = (
+  const breadcrumbs = (
     <Breadcrumbs
       links={[{ name: "Academics", path: "/academics" }, { name: "Programs" }]}
     />
   );
 
-  // Main Category View
+  /* ---------- MAIN VIEW ---------- */
+
   if (view === "main") {
     return (
-      <div style={{ backgroundColor: "#fff", minHeight: "80vh" }}>
-        {programBreadcrumbs}
-        <div
-          style={{
-            padding: "60px 20px",
-            textAlign: "center",
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "30px",
-              borderBottom: "3px solid #000",
-              display: "inline-block",
-              marginBottom: "50px",
-              fontWeight: "bold",
-            }}
-          >
-            ACADEMIC PROGRAMS
-          </h1>
-          <div
-            style={{
-              display: "flex",
-              gap: "30px",
-              justifyContent: "center",
-              maxWidth: "800px",
-              margin: "0 auto",
-            }}
-          >
-            <div onClick={() => setView("inter")} style={cardStyle}>
-              <div style={{ fontSize: "50px" }}>🎓</div>
-              <h2 style={{ marginTop: "15px", fontSize: "22px" }}>
-                INTERMEDIATE
-              </h2>
-              <p style={{ color: "#666" }}>F.A / F.Sc / ICS / I.Com</p>
+      <div style={wrapper}>
+        {breadcrumbs}
+
+        <section style={hero}>
+          <h1 style={heroTitle}>Academic Programs</h1>
+          <div style={divider}></div>
+          <p style={heroText}>
+            Explore the academic programs offered at Government Associate
+            College for Women, Chung.
+          </p>
+        </section>
+
+        <div style={container}>
+          <div style={cardGrid}>
+            <div onClick={() => setView("inter")} style={card}>
+              <div style={icon}>🎓</div>
+              <h2 style={cardTitle}>Intermediate</h2>
+              <p style={cardDesc}>F.Sc / ICS / FA / I.Com</p>
             </div>
-            <div onClick={() => setView("adp")} style={cardStyle}>
-              <div style={{ fontSize: "50px" }}>📜</div>
-              <h2 style={{ marginTop: "15px", fontSize: "22px" }}>ADP</h2>
-              <p style={{ color: "#666" }}>Associate Degree Programs</p>
+
+            <div onClick={() => setView("adp")} style={card}>
+              <div style={icon}>📜</div>
+              <h2 style={cardTitle}>ADP</h2>
+              <p style={cardDesc}>Associate Degree Programs</p>
             </div>
           </div>
         </div>
@@ -61,63 +45,61 @@ const Programs = () => {
     );
   }
 
-  // Intermediate View
+  /* ---------- INTERMEDIATE VIEW ---------- */
+
   if (view === "inter") {
     return (
-      <div style={{ backgroundColor: "#fff", minHeight: "80vh" }}>
-        {programBreadcrumbs}
-        <div style={containerStyle}>
+      <div style={wrapper}>
+        {breadcrumbs}
+
+        <div style={container}>
           <button onClick={() => setView("main")} style={backBtn}>
-            ← Back
+            ← Back to Programs
           </button>
-          <h2 style={headerStyle}>INTERMEDIATE</h2>
-          <ul style={listStyle}>
-            <li>› F.Sc (Pre-Medical)</li>
-            <li>› F.Sc (Pre-Engineering)</li>
-            <li>› I.C.S (Computer Science)</li>
-            <li>› I.Com (Commerce)</li>
-            <li>› F.A (Arts & Humanities)</li>
-          </ul>
+
+          <h2 style={sectionTitle}>Intermediate Programs</h2>
+
+          <div style={programList}>
+            <div style={programItem}>F.Sc (Pre-Medical)</div>
+            <div style={programItem}>F.Sc (Pre-Engineering)</div>
+            <div style={programItem}>ICS (Computer Science)</div>
+            <div style={programItem}>I.Com (Commerce)</div>
+            <div style={programItem}>F.A (Arts & Humanities)</div>
+          </div>
         </div>
       </div>
     );
   }
 
-  // ADP View
+  /* ---------- ADP VIEW ---------- */
+
   if (view === "adp") {
     return (
-      <div style={{ backgroundColor: "#fff", minHeight: "80vh" }}>
-        {programBreadcrumbs}
-        <div style={containerStyle}>
+      <div style={wrapper}>
+        {breadcrumbs}
+
+        <div style={container}>
           <button onClick={() => setView("main")} style={backBtn}>
-            ← Back
+            ← Back to Programs
           </button>
-          <h2 style={headerStyle}>ADP DEPARTMENTS</h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "10px",
-            }}
-          >
-            <ul style={listStyle}>
-              <li>› English</li>
-              <li>› Psychology</li>
-              <li>› Education</li>
-              <li>› Journalism</li>
-              <li>› Political Science</li>
-              <li>› Economics</li>
-              <li>› Islamiat</li>
-            </ul>
-            <ul style={listStyle}>
-              <li>› Physics</li>
-              <li>› Mathematics</li>
-              <li>› Chemistry</li>
-              <li>› Botany</li>
-              <li>› Zoology</li>
-              <li>› Statistics</li>
-              <li>› Fine Arts</li>
-            </ul>
+
+          <h2 style={sectionTitle}>Associate Degree Programs (ADP)</h2>
+
+          <div style={grid}>
+            <div style={programItem}>English</div>
+            <div style={programItem}>Psychology</div>
+            <div style={programItem}>Education</div>
+            <div style={programItem}>Journalism</div>
+            <div style={programItem}>Political Science</div>
+            <div style={programItem}>Economics</div>
+            <div style={programItem}>Islamiat</div>
+            <div style={programItem}>Physics</div>
+            <div style={programItem}>Mathematics</div>
+            <div style={programItem}>Chemistry</div>
+            <div style={programItem}>Botany</div>
+            <div style={programItem}>Zoology</div>
+            <div style={programItem}>Statistics</div>
+            <div style={programItem}>Fine Arts</div>
           </div>
         </div>
       </div>
@@ -125,34 +107,107 @@ const Programs = () => {
   }
 };
 
-// Styles (Aapke original styles barkarar hain)
-const cardStyle = {
-  flex: 1,
+/* ---------- STYLES ---------- */
+
+const wrapper = {
+  width: "100%",
+  minHeight: "100vh",
+  background: "#fff",
+};
+
+const hero = {
+  background: "#1a237e",
+  color: "white",
+  textAlign: "center",
+  padding: "70px 20px",
+};
+
+const heroTitle = {
+  fontSize: "38px",
+  fontWeight: "800",
+};
+
+const heroText = {
+  marginTop: "10px",
+  opacity: "0.9",
+};
+
+const divider = {
+  width: "60px",
+  height: "4px",
+  background: "white",
+  margin: "18px auto",
+};
+
+const container = {
+  maxWidth: "1000px",
+  margin: "0 auto",
+  padding: "60px 20px",
+};
+
+const cardGrid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))",
+  gap: "30px",
+};
+
+const card = {
+  background: "#fff",
+  border: "1px solid #eee",
   padding: "40px",
-  border: "1px solid #000",
+  borderRadius: "12px",
+  textAlign: "center",
   cursor: "pointer",
+  boxShadow: "0 8px 25px rgba(0,0,0,0.06)",
   transition: "0.3s",
 };
-const containerStyle = { padding: "40px", maxWidth: "800px", margin: "0 auto" };
+
+const icon = {
+  fontSize: "48px",
+};
+
+const cardTitle = {
+  marginTop: "15px",
+  color: "#1a237e",
+};
+
+const cardDesc = {
+  color: "#666",
+};
+
 const backBtn = {
-  marginBottom: "20px",
-  cursor: "pointer",
-  padding: "8px 15px",
-  background: "#000",
-  color: "#fff",
+  padding: "10px 18px",
   border: "none",
+  background: "#1a237e",
+  color: "white",
+  borderRadius: "6px",
+  cursor: "pointer",
+  marginBottom: "25px",
 };
-const headerStyle = {
-  borderLeft: "5px solid #000",
-  paddingLeft: "15px",
-  marginBottom: "30px",
-  fontWeight: "bold",
+
+const sectionTitle = {
+  color: "#1a237e",
+  marginBottom: "25px",
+  fontSize: "26px",
 };
-const listStyle = {
-  listStyle: "none",
-  padding: 0,
-  fontSize: "18px",
-  lineHeight: "2",
+
+const programList = {
+  display: "grid",
+  gap: "12px",
+};
+
+const grid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
+  gap: "12px",
+};
+
+const programItem = {
+  padding: "14px 18px",
+  background: "#f8faff",
+  borderRadius: "8px",
+  borderLeft: "4px solid #1a237e",
+  fontSize: "16px",
 };
 
 export default Programs;

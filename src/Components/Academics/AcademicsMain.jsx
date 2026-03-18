@@ -1,92 +1,120 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// Breadcrumbs import add kiya
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const AcademicsMain = () => {
-  const listItems = [
-    { name: "Programs", path: "/academics/programs" },
-    { name: "Faculty", path: "/academics/faculty" },
-    { name: "Class Schedule", path: "/academics/class-schedule" },
-    { name: "Timetable", path: "/academics/timetable" },
-    { name: "Exam Schedule", path: "/academics/exams" },
-    { name: "Results", path: "/academics/results" },
+  const items = [
+    { name: "Programs", path: "/academics/programs", desc: "Explore degree programs offered by the college." },
+    { name: "Faculty", path: "/academics/faculty", desc: "Meet our qualified and experienced faculty members." },
+    { name: "Class Schedule", path: "/academics/class-schedule", desc: "View regular class schedules for students." },
+    { name: "Timetable", path: "/academics/timetable", desc: "Access the official academic timetable." },
+    { name: "Exam Schedule", path: "/academics/exams", desc: "Check examination dates and schedules." },
+    { name: "Results", path: "/academics/results", desc: "View examination results and academic records." },
   ];
 
   return (
-    <div style={pageWrapper}>
-      {/* Breadcrumbs add kiya - links array ke sath */}
+    <div style={wrapper}>
       <Breadcrumbs links={[{ name: "Academics" }]} />
 
-      <div style={contentArea}>
-        <h1 style={headingStyle}>Academics</h1>
+      {/* Header */}
+      <section style={heroSection}>
+        <h1 style={heroTitle}>Academics</h1>
+        <div style={divider}></div>
+        <p style={heroSubtitle}>
+          Academic programs, schedules, faculty, and examination information
+        </p>
+      </section>
 
-        <ul style={listStyle}>
-          {listItems.map((item, index) => (
-            <li key={index} style={listItemStyle}>
-              <span style={bulletStyle}>•</span>
-              <Link
-                to={item.path}
-                style={linkStyle}
-                onMouseOver={(e) =>
-                  (e.target.style.textDecoration = "underline")
-                }
-                onMouseOut={(e) => (e.target.style.textDecoration = "none")}
-              >
-                {item.name}
-              </Link>
-            </li>
+      {/* Content */}
+      <div style={container}>
+        <div style={grid}>
+          {items.map((item, index) => (
+            <Link key={index} to={item.path} style={card}>
+              <h3 style={cardTitle}>{item.name}</h3>
+              <p style={cardDesc}>{item.desc}</p>
+              <span style={cardLink}>View Details →</span>
+            </Link>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );
 };
 
-// --- STYLES (Admissions page se match kar diye hain) ---
-const pageWrapper = {
+/* ---------- STYLES ---------- */
+
+const wrapper = {
   width: "100%",
-  minHeight: "80vh",
-  backgroundColor: "#fff",
+  minHeight: "100vh",
+  background: "#fff",
 };
 
-const contentArea = {
-  padding: "40px 20px", // Side extra space khatam kar di
-  width: "100%",
+const heroSection = {
+  background: "#1a237e",
+  color: "white",
+  textAlign: "center",
+  padding: "70px 20px",
 };
 
-const headingStyle = {
-  fontSize: "30px",
-  color: "#333",
-  borderBottom: "1px solid #eee",
-  paddingBottom: "10px",
-  marginBottom: "25px",
-  fontWeight: "500",
-  width: "100%",
+const heroTitle = {
+  fontSize: "38px",
+  fontWeight: "800",
 };
 
-const listStyle = { listStyle: "none", padding: 0 };
-
-const listItemStyle = {
-  display: "flex",
-  alignItems: "center",
-  marginBottom: "15px",
-  borderBottom: "1px solid #f0f0f0",
-  paddingBottom: "12px",
+const heroSubtitle = {
+  marginTop: "10px",
+  opacity: "0.9",
 };
 
-const bulletStyle = {
-  color: "#1a237e",
-  fontSize: "22px",
-  marginRight: "12px",
+const divider = {
+  width: "60px",
+  height: "4px",
+  background: "white",
+  margin: "18px auto",
 };
 
-const linkStyle = {
-  color: "#1a237e",
+const container = {
+  maxWidth: "1100px",
+  margin: "0 auto",
+  padding: "60px 20px",
+};
+
+const grid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+  gap: "25px",
+};
+
+const card = {
+  background: "#fff",
+  padding: "30px",
+  borderRadius: "12px",
+  borderTop: "4px solid #1a237e",
   textDecoration: "none",
-  fontSize: "18px",
-  fontWeight: "500",
+  boxShadow: "0 6px 20px rgba(0,0,0,0.06)",
   transition: "0.3s",
+  display: "flex",
+  flexDirection: "column",
+  gap: "10px",
+};
+
+const cardTitle = {
+  color: "#1a237e",
+  fontSize: "20px",
+  marginBottom: "5px",
+};
+
+const cardDesc = {
+  color: "#666",
+  fontSize: "15px",
+  lineHeight: "1.6",
+};
+
+const cardLink = {
+  marginTop: "10px",
+  color: "#1a237e",
+  fontWeight: "600",
+  fontSize: "14px",
 };
 
 export default AcademicsMain;

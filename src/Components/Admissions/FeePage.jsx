@@ -1,11 +1,10 @@
 import React from "react";
-// Folder 'Breadcrumbs' aur file 'Breadcrumbs.jsx' ke mutabiq import
+import { CreditCard } from "lucide-react";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const FeePage = () => {
   return (
-    <div style={pageWrapper}>
-      {/* Hum ne 'links' array pass kiya hai taake navigation clickable ho */}
+    <div style={wrapper}>
       <Breadcrumbs
         links={[
           { name: "Admissions", path: "/admissions" },
@@ -13,131 +12,135 @@ const FeePage = () => {
         ]}
       />
 
-      <div style={contentArea}>
-        <div style={headerTextWrapper}>
-          <p style={subLabel}>FINANCIAL DETAILS</p>
-          <h1 style={headingStyle}>Fee Structure</h1>
-        </div>
+      {/* Header */}
+      <section style={hero}>
+        <h1 style={heroTitle}>Fee Structure</h1>
+        <div style={divider}></div>
+        <p style={heroText}>
+          Details of admission and academic fees for Intermediate and BS
+          programs.
+        </p>
+      </section>
 
-        {/* --- BS Program Section --- */}
-        <div style={sectionWrapper}>
-          <h2 style={tableTitle}>BS Four Years Degree Program</h2>
-          <p style={tableNote}>(To be paid once for whole program)</p>
-          <div style={tableResponsive}>
-            <table style={tableStyle}>
+      <div style={container}>
+        {/* BS Program */}
+        <section style={section}>
+          <h2 style={sectionTitle}>
+            <CreditCard size={20} /> ADP Degree Program
+          </h2>
+          <p style={note}>(One-time payment for the entire program)</p>
+
+          <div style={tableWrapper}>
+            <table style={table}>
               <thead>
-                <tr style={theadRow}>
-                  <th style={thStyle}>Details</th>
-                  <th style={thStyle}>Amount (Rs.)</th>
+                <tr style={tableHead}>
+                  <th style={th}>Details</th>
+                  <th style={th}>Amount (Rs.)</th>
                 </tr>
               </thead>
+
               <tbody>
                 <tr>
-                  <td style={tdStyle}>Admission Fee</td>
-                  <td style={tdStyle}>175/-</td>
+                  <td style={td}>Admission Fee</td>
+                  <td style={td}>175</td>
                 </tr>
                 <tr>
-                  <td style={tdStyle}>Tuition Fee</td>
-                  <td style={tdStyle}>360/-</td>
+                  <td style={td}>Tuition Fee</td>
+                  <td style={td}>360</td>
                 </tr>
                 <tr>
-                  <td style={tdStyle}>General + Examination + Sports Fund</td>
-                  <td style={tdStyle}>340/-</td>
+                  <td style={td}>General + Examination + Sports Fund</td>
+                  <td style={td}>340</td>
                 </tr>
                 <tr>
-                  <td style={tdStyle}>Medical Fund / Red Crescent Fund</td>
-                  <td style={tdStyle}>60/-</td>
+                  <td style={td}>Medical / Red Crescent Fund</td>
+                  <td style={td}>60</td>
                 </tr>
                 <tr>
-                  <td style={tdStyle}>Registration / Affiliation / Exam Fee</td>
-                  <td style={tdStyle}>2560/-</td>
+                  <td style={td}>Registration / Affiliation / Exam Fee</td>
+                  <td style={td}>2560</td>
                 </tr>
                 <tr>
-                  <td style={tdStyle}>Welfare + ID Card Fund</td>
-                  <td style={tdStyle}>100/-</td>
+                  <td style={td}>Welfare + ID Card Fund</td>
+                  <td style={td}>100</td>
                 </tr>
                 <tr>
-                  <td style={tdStyle}>Library Security (Refundable)</td>
-                  <td style={tdStyle}>300/-</td>
+                  <td style={td}>Library Security (Refundable)</td>
+                  <td style={td}>300</td>
                 </tr>
                 <tr>
-                  <td style={tdStyle}>Computer Security (Refundable)</td>
-                  <td style={tdStyle}>500/-</td>
+                  <td style={td}>Computer Security (Refundable)</td>
+                  <td style={td}>500</td>
                 </tr>
+
                 <tr style={totalRow}>
-                  <td style={tdStyle}>
-                    <strong>Total Approximate</strong>
-                  </td>
-                  <td style={tdStyle}>
-                    <strong>4,400/-</strong>
-                  </td>
+                  <td style={td}><strong>Total Approximate</strong></td>
+                  <td style={td}><strong>4,400</strong></td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </div>
+        </section>
 
-        {/* --- Intermediate Section --- */}
-        <div style={sectionWrapper}>
-          <h2 style={tableTitle}>Intermediate (F.A / F.Sc / I.Com / ICS)</h2>
-          <div style={tableResponsive}>
-            <table style={tableStyle}>
+        {/* Intermediate */}
+        <section style={section}>
+          <h2 style={sectionTitle}>Intermediate (F.A / F.Sc / ICS / I.Com)</h2>
+
+          <div style={tableWrapper}>
+            <table style={table}>
               <thead>
-                <tr style={theadRow}>
-                  <th style={thStyle}>Title of Account</th>
-                  <th style={thStyle}>Amount (Rs.)</th>
+                <tr style={tableHead}>
+                  <th style={th}>Title of Account</th>
+                  <th style={th}>Amount (Rs.)</th>
                 </tr>
               </thead>
+
               <tbody>
                 <tr>
-                  <td style={tdStyle}>Admission Fee</td>
-                  <td style={tdStyle}>65 / 80</td>
+                  <td style={td}>Admission Fee</td>
+                  <td style={td}>65 / 80</td>
                 </tr>
                 <tr>
-                  <td style={tdStyle}>Tuition Fee</td>
-                  <td style={tdStyle}>600/-</td>
+                  <td style={td}>Tuition Fee</td>
+                  <td style={td}>600</td>
                 </tr>
                 <tr>
-                  <td style={tdStyle}>General + Sports + Examination Fund</td>
-                  <td style={tdStyle}>410/-</td>
+                  <td style={td}>General + Sports + Examination Fund</td>
+                  <td style={td}>410</td>
                 </tr>
                 <tr>
-                  <td style={tdStyle}>
-                    Registration + Processing + Affiliation
-                  </td>
-                  <td style={tdStyle}>1435/-</td>
+                  <td style={td}>Registration + Processing + Affiliation</td>
+                  <td style={td}>1435</td>
                 </tr>
                 <tr>
-                  <td style={tdStyle}>Library Security Fund</td>
-                  <td style={tdStyle}>500/-</td>
+                  <td style={td}>Library Security</td>
+                  <td style={td}>500</td>
                 </tr>
                 <tr>
-                  <td style={tdStyle}>2nd Shift (Additional Charges)</td>
-                  <td style={tdStyle}>3600/-</td>
+                  <td style={td}>2nd Shift Additional Charges</td>
+                  <td style={td}>3600</td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </div>
+        </section>
 
-        <div style={notesSection}>
-          <h3 style={notesTitle}>Important Notes:</h3>
-          <ul style={ulStyle}>
+        {/* Notes */}
+        <div style={noteBox}>
+          <h3 style={noteTitle}>Important Notes</h3>
+
+          <ul style={list}>
+            <li>Transport facility available at Rs.500 per month.</li>
             <li>
-              Transport fee will be charged @ Rs.500/- p.m. for those availing
-              the facility.
-            </li>
-            <li>
-              Security refund can be claimed within two academic years after
+              Security deposits can be claimed within two academic years after
               completion.
             </li>
             <li>
-              <strong>Scholarships:</strong> All merit scholarships by
-              Govt/University are applicable.
+              Government and University merit scholarships are applicable.
             </li>
             <li>
-              <strong>Hafiza-e-Quran:</strong> Full fee concession throughout
-              the F.A/F.Sc session.
+              Hafiza-e-Quran students receive full fee concession during
+              F.A/F.Sc sessions.
             </li>
           </ul>
         </div>
@@ -146,58 +149,106 @@ const FeePage = () => {
   );
 };
 
-// --- STYLES ---
-const pageWrapper = { width: "100%", backgroundColor: "#fff" };
-const contentArea = { padding: "40px 20px" };
-const headerTextWrapper = { marginBottom: "40px" };
-const subLabel = { fontSize: "12px", color: "#1a237e", fontWeight: "700" };
-const headingStyle = {
-  fontSize: "32px",
-  color: "#333",
-  fontWeight: "600",
-  marginTop: "5px",
+/* ---------- STYLES ---------- */
+
+const wrapper = {
+  width: "100%",
+  background: "#fff",
+  minHeight: "100vh",
 };
-const sectionWrapper = { marginBottom: "50px" };
-const tableTitle = {
-  fontSize: "22px",
+
+const hero = {
+  background: "#1a237e",
+  color: "white",
+  textAlign: "center",
+  padding: "70px 20px",
+};
+
+const heroTitle = {
+  fontSize: "38px",
+  fontWeight: "800",
+};
+
+const heroText = {
+  marginTop: "10px",
+  opacity: "0.9",
+};
+
+const divider = {
+  width: "60px",
+  height: "4px",
+  background: "white",
+  margin: "18px auto",
+};
+
+const container = {
+  maxWidth: "1100px",
+  margin: "0 auto",
+  padding: "60px 20px",
+};
+
+const section = {
+  marginBottom: "50px",
+};
+
+const sectionTitle = {
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
   color: "#1a237e",
-  marginBottom: "5px",
-  fontWeight: "600",
+  marginBottom: "10px",
 };
-const tableNote = { fontSize: "14px", color: "#888", marginBottom: "15px" };
-const tableResponsive = { overflowX: "auto", width: "100%" };
-const tableStyle = {
+
+const note = {
+  fontSize: "13px",
+  color: "#777",
+};
+
+const tableWrapper = {
+  overflowX: "auto",
+  marginTop: "15px",
+};
+
+const table = {
   width: "100%",
   borderCollapse: "collapse",
-  marginTop: "10px",
-  textAlign: "left",
 };
-const theadRow = { backgroundColor: "#1a237e", color: "#fff" };
-const thStyle = {
-  padding: "12px 15px",
-  fontWeight: "500",
+
+const tableHead = {
+  background: "#1a237e",
+  color: "#fff",
+};
+
+const th = {
+  padding: "12px",
   border: "1px solid #1a237e",
 };
-const tdStyle = {
-  padding: "10px 15px",
+
+const td = {
+  padding: "10px",
   border: "1px solid #eee",
-  fontSize: "15px",
-  color: "#444",
 };
-const totalRow = { backgroundColor: "#f9f9f9" };
-const notesSection = {
+
+const totalRow = {
+  background: "#f7f7f7",
+};
+
+const noteBox = {
   marginTop: "40px",
-  padding: "25px",
-  backgroundColor: "#f0f2ff",
-  borderRadius: "2px",
+  padding: "20px",
+  background: "#f0f2ff",
   borderLeft: "5px solid #1a237e",
+  borderRadius: "6px",
 };
-const notesTitle = { margin: "0 0 15px 0", color: "#1a237e", fontSize: "18px" };
-const ulStyle = {
+
+const noteTitle = {
+  marginBottom: "10px",
+  color: "#1a237e",
+};
+
+const list = {
   paddingLeft: "20px",
-  color: "#444",
   lineHeight: "1.8",
-  fontSize: "14px",
 };
 
 export default FeePage;

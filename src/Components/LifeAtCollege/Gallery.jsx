@@ -1,104 +1,213 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "./Gallery.css";
+import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [previewImg, setPreviewImg] = useState(null);
 
-  // Miscellaneous aur College Walks nikal di hain
-  const categories = [
-    "Science Exhibition",
-    "Funfair",
-    "Sports Day",
-    "Seminars",
-    "Kashmir Day",
-  ];
+  const galleryData = {
+    "Science Exhibition": [
+      "/Science exhibition.jpg",
+      "/Science exhibition2.jpg",
+      "/Science exhibition3.jpg",
+    ],
 
-  const getImagePath = (cat, index) => {
-    // 1. Science Exhibition (.jpg)
-    if (cat === "Science Exhibition") {
-      const suffix = index === 0 ? "" : index;
-      return `/Science exhibition${suffix}.jpg`;
-    }
+    Funfair: [
+      "/fun.jpeg",
+      "/fun1.jpeg",
+      "/funfair5.jpeg",
+    ],
 
-    // 2. Sports Day (Exact Name: SportsDay1.jpeg)
-    if (cat === "Sports Day") {
-      return `/SportsDay${index + 1}.jpeg`;
-    }
+    "Sports Day": [
+      "/SportsDay1.jpeg",
+      "/SportsDay2.jpeg",
+      "/SportsDay3.jpeg",
+      "/SportsDay4.jpeg",
+    ],
 
-    // 3. Funfair (Agar aapne name funfair1.jpeg rakha hai)
-    if (cat === "Funfair") {
-      return `/funfair${index + 1}.jpeg`;
-    }
+    PTM: [
+      "/PTM.jpeg",
+      "/PTM1.jpeg",
+      "/PTM2.jpeg",
+    ],
 
-    return `/${cat}.jpg`;
+    Convocation: [
+      "/Convocation.jpeg",
+    ],
   };
 
+  const categories = Object.keys(galleryData);
+
   return (
-    <div className="gallery-clean-wrapper">
-      <div className="clean-breadcrumb">
-        <Link to="/" className="breadcrumb-link">
-          Home
-        </Link>{" "}
-        /
-        <Link to="/life-at-college" className="breadcrumb-link">
-          {" "}
-          Life at College
-        </Link>{" "}
-        /{" "}
-        <span
-          onClick={() => setSelectedCategory(null)}
-          className="breadcrumb-current clickable-text"
-        >
-          Gallery
-        </span>
-        {selectedCategory && (
-          <span className="active-cat-path"> / {selectedCategory}</span>
-        )}
-      </div>
+    <div style={wrapper}>
+      <Breadcrumbs
+        links={[
+          { name: "Life at College", path: "/life-at-college" },
+          { name: "Gallery" },
+        ]}
+      />
 
       {!selectedCategory ? (
-        <div className="list-only-view">
-          <h1 className="minimal-title">Gallery</h1>
-          <ul className="no-line-list">
+        <>
+          <h1 style={title}>Gallery</h1>
+
+          <div style={categoryGrid}>
             {categories.map((cat, index) => (
-              <li key={index} onClick={() => setSelectedCategory(cat)}>
-                • {cat}
-              </li>
+              <div
+                key={index}
+                style={categoryCard}
+                onClick={() => setSelectedCategory(cat)}
+              >
+                {cat}
+              </div>
             ))}
-          </ul>
-        </div>
+          </div>
+        </>
       ) : (
-        <div className="grid-only-view">
-          <div className="grid-header-minimal">
-            <h2 className="cat-title">{selectedCategory}</h2>
-            <span
-              className="back-text"
+        <>
+          <div style={header}>
+            <h2>{selectedCategory}</h2>
+
+            <button
+              style={backBtn}
               onClick={() => setSelectedCategory(null)}
             >
               ← Back
-            </span>
+            </button>
           </div>
 
-          <div className="borderless-grid">
-            {[0, 1, 2, 3].map((idx) => (
-              <div key={idx} className="borderless-card">
+          <div style={galleryGrid}>
+            {galleryData[selectedCategory].map((img, index) => (
+              <div
+                key={index}
+                style={galleryCard}
+                onClick={() => setPreviewImg(img)}
+              >
                 <img
-                  src={getImagePath(selectedCategory, idx)}
+                  src={img}
                   alt={selectedCategory}
+                  style={galleryImage}
+                  loading="lazy"
                   onError={(e) =>
                     (e.target.src =
                       "https://via.placeholder.com/400x300?text=Image+Coming+Soon")
                   }
                 />
-                <div className="dark-label">{selectedCategory}</div>
+
+                <div style={overlay}>
+                  {selectedCategory}
+                </div>
               </div>
             ))}
           </div>
+        </>
+      )}
+
+      {/* Image Preview */}
+      {previewImg && (
+        <div style={modal} onClick={() => setPreviewImg(null)}>
+          <img src={previewImg} alt="preview" style={modalImage} />
         </div>
       )}
     </div>
   );
+};
+
+/* STYLES */
+
+const wrapper = {
+  padding: "40px 20px",
+  maxWidth: "1200px",
+  margin: "0 auto",
+};
+
+const title = {
+  fontSize: "36px",
+  textAlign: "center",
+  marginBottom: "40px",
+  color: "#1a237e",
+};
+
+const categoryGrid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
+  gap: "20px",
+};
+
+const categoryCard = {
+  padding: "25px",
+  textAlign: "center",
+  background: "#f8faff",
+  borderRadius: "8px",
+  cursor: "pointer",
+  fontWeight: "600",
+  borderLeft: "4px solid #1a237e",
+};
+
+const header = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginBottom: "30px",
+};
+
+const backBtn = {
+  padding: "8px 16px",
+  background: "#1a237e",
+  color: "#fff",
+  border: "none",
+  borderRadius: "6px",
+  cursor: "pointer",
+};
+
+const galleryGrid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fill,minmax(260px,1fr))",
+  gap: "20px",
+};
+
+const galleryCard = {
+  position: "relative",
+  overflow: "hidden",
+  borderRadius: "10px",
+  cursor: "pointer",
+};
+
+const galleryImage = {
+  width: "100%",
+  height: "220px",
+  objectFit: "cover",
+  display: "block",
+};
+
+const overlay = {
+  position: "absolute",
+  bottom: "0",
+  left: "0",
+  right: "0",
+  background: "rgba(0,0,0,0.5)",
+  color: "#fff",
+  padding: "8px",
+  fontSize: "14px",
+  textAlign: "center",
+};
+
+const modal = {
+  position: "fixed",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
+  background: "rgba(0,0,0,0.8)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: 999,
+};
+
+const modalImage = {
+  maxWidth: "90%",
+  maxHeight: "90%",
 };
 
 export default Gallery;

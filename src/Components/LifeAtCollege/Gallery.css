@@ -1,63 +1,133 @@
-.gallery-clean-wrapper {
-  width: 100%;
-  padding: 0 5%;
-  background-color: #fff;
-  position: relative;
-  z-index: 1; 
+.gallery-wrapper{
+padding:40px 5%;
+background:#ffffff;
+min-height:100vh;
 }
 
-.clean-breadcrumb {
-  font-size: 13px;
-  padding: 10px 0;
-  border-bottom: 1px solid #f0f0f0;
-  position: relative;
-  z-index: 9999 !important; /* Isko sab se upar rakha hai taake click ho sakay */
+/* Title */
+
+.gallery-title{
+font-size:32px;
+font-weight:700;
+color:#1a237e;
+margin-bottom:30px;
 }
 
-/* Black links fix */
-.breadcrumb-link, .clickable-text {
-  text-decoration: none !important;
-  color: #000 !important;
-  cursor: pointer !important;
-  pointer-events: auto !important; /* Force clicks */
-  display: inline-block;
+/* Category Grid */
+
+.gallery-category-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
 }
 
-.breadcrumb-link:hover, .clickable-text:hover {
-  text-decoration: underline !important;
+.gallery-category-card{
+background:#f8f9ff;
+border:1px solid #e4e7ff;
+padding:20px;
+text-align:center;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+border-radius:6px;
+color:#1a237e;
 }
 
-.no-line-list li {
-  color: #0056b3; 
-  padding: 8px 0;
-  cursor: pointer;
-  width: fit-content;
+.gallery-category-card:hover{
+background:#1a237e;
+color:#fff;
+transform:translateY(-4px);
 }
 
-.borderless-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 15px;
+/* Header */
+
+.gallery-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
 }
 
-.borderless-card {
-  border: 1px solid #ddd;
-  padding: 4px;
+.gallery-header h2{
+color:#1a237e;
 }
 
-.borderless-card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
+/* Back Button */
+
+.gallery-back-btn{
+background:#1a237e;
+color:#fff;
+border:none;
+padding:8px 16px;
+cursor:pointer;
+border-radius:4px;
+font-weight:500;
+transition:0.2s;
 }
 
-.dark-label {
-  background: #0d1137;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
+.gallery-back-btn:hover{
+background:#0d1763;
+}
+
+/* Image Grid */
+
+.gallery-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.gallery-card{
+position:relative;
+overflow:hidden;
+border-radius:6px;
+cursor:pointer;
+}
+
+.gallery-card img{
+width:100%;
+height:220px;
+object-fit:cover;
+transition:0.3s;
+}
+
+/* Hover Zoom */
+
+.gallery-card:hover img{
+transform:scale(1.08);
+}
+
+/* Overlay */
+
+.gallery-overlay{
+position:absolute;
+bottom:0;
+left:0;
+right:0;
+background:rgba(0,0,0,0.6);
+color:#fff;
+text-align:center;
+padding:8px;
+font-size:14px;
+}
+
+/* Modal Preview */
+
+.gallery-modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:999;
+}
+
+.gallery-modal img{
+max-width:90%;
+max-height:85%;
+border-radius:6px;
 }

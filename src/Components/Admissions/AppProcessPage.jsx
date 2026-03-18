@@ -1,11 +1,9 @@
 import React from "react";
-// Folder 'Breadcrumbs' aur file 'Breadcrumbs.jsx' ke mutabiq import
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const AppProcessPage = () => {
   return (
-    <div style={pageWrapper}>
-      {/* Breadcrumbs component ko context ke sath update kiya */}
+    <div style={wrapper}>
       <Breadcrumbs
         links={[
           { name: "Admissions", path: "/admissions" },
@@ -13,171 +11,175 @@ const AppProcessPage = () => {
         ]}
       />
 
-      <div style={contentArea}>
-        <div style={headerTextWrapper}>
-          <p style={subLabel}>WHAT WE OFFER</p>
-          <h1 style={headingStyle}>Application Process</h1>
-        </div>
+      {/* Header */}
+      <section style={hero}>
+        <h1 style={heroTitle}>Application Process</h1>
+        <div style={divider}></div>
+        <p style={heroText}>
+          Follow the steps below to apply for Intermediate and ADP programs at
+          Government Associate College for Women, Chung.
+        </p>
+      </section>
 
-        {/* --- Intermediate Section --- */}
-        <div style={sectionBox}>
-          <h2 style={subHeadingStyle}>Intermediate Program</h2>
+      <div style={container}>
+        {/* INTERMEDIATE */}
+        <section style={section}>
+          <h2 style={sectionTitle}>Intermediate Programs</h2>
 
-          <h3 style={titleStyle}>Selection Criteria</h3>
-          <ul style={listStyle}>
-            <li style={listItemStyle}>
-              <span style={bulletStyle}>•</span> Submit separate admission forms
-              for Science, Arts, General Science, I.C.S, and I.Com.
+          <h3 style={subTitle}>Selection Criteria</h3>
+          <ul style={list}>
+            <li>Separate admission forms must be submitted for each program.</li>
+            <li>
+              Sports quota admissions are available only for the F.A. program.
             </li>
-            <li style={listItemStyle}>
-              <span style={bulletStyle}>•</span> Admission Quota on the basis of
-              Sports is only available for F.A.
-            </li>
-            <li style={listItemStyle}>
-              <span style={bulletStyle}>•</span> 2% quota for physical
-              disability (Certificate required).
+            <li>
+              A 2% quota is reserved for students with physical disabilities
+              (official certificate required).
             </li>
           </ul>
 
-          <h3 style={titleStyle}>Required Documents</h3>
-          <div style={docGrid}>
-            <div style={docCard}>Matric Result Card (2 Photocopies)</div>
-            <div style={docCard}>4 Photos (Blue Background)</div>
+          <h3 style={subTitle}>Required Documents</h3>
+          <div style={grid}>
+            <div style={docCard}>Matric Result Card (2 Copies)</div>
+            <div style={docCard}>4 Passport Size Photos (Blue Background)</div>
             <div style={docCard}>Character Certificate (2 Copies)</div>
             <div style={docCard}>Father/Guardian CNIC (1 Copy)</div>
           </div>
-        </div>
+        </section>
 
-        {/* --- ADP Section --- */}
-        <div style={sectionBox}>
-          <h2 style={{ ...subHeadingStyle, color: "#d32f2f" }}>ADP Program</h2>
+        {/* ADP */}
+        <section style={section}>
+          <h2 style={{ ...sectionTitle, color: "#b22222" }}>
+            ADP (Associate Degree Program)
+          </h2>
+
           <p style={infoText}>
-            Admission to ADP classes is made according to the schedule
-            advertised in leading newspapers.
+            Admissions for ADP programs are conducted according to schedules
+            announced in national newspapers and the official college notice
+            board.
           </p>
 
-          <h3 style={titleStyle}>Selection Criteria</h3>
-          <ul style={listStyle}>
-            <li style={listItemStyle}>
-              <span style={bulletStyle}>•</span> F.A., F.Sc., A-Level / Senior
-              Cambridge students are eligible to apply.
-            </li>
-            <li style={listItemStyle}>
-              <span style={bulletStyle}>•</span> Minimum 60% marks required; Age
-              must be under 22 years.
-            </li>
-            <li style={listItemStyle}>
-              <span style={bulletStyle}>•</span> English Literature & Fine Arts
-              candidates must pass an aptitude test.
+          <h3 style={subTitle}>Selection Criteria</h3>
+          <ul style={list}>
+            <li>F.A., F.Sc., A-Level or Senior Cambridge students may apply.</li>
+            <li>Minimum 60% marks required; age limit is under 22 years.</li>
+            <li>
+              English Literature and Fine Arts applicants must pass an aptitude
+              test.
             </li>
           </ul>
 
-          <h3 style={titleStyle}>Requirement After Application</h3>
-          <div style={docGrid}>
+          <h3 style={subTitle}>Required After Application</h3>
+          <div style={grid}>
             <div style={docCard}>Student B-Form (4 Copies)</div>
             <div style={docCard}>Matric Certificate (4 Copies)</div>
-            <div style={docCard}>F.A. / F.Sc. Result Card (4 Copies)</div>
+            <div style={docCard}>F.A. / F.Sc Result Card (4 Copies)</div>
             <div style={docCard}>Student ID Card (4 Copies)</div>
           </div>
-        </div>
+        </section>
 
+        {/* NOTE */}
         <div style={noteBox}>
-          <strong>Note:</strong> All departments are responsible for admissions.
-          Any clerical mistake may lead to cancellation.
+          <strong>Important Note:</strong> All departments are responsible for
+          verifying admission documents. Any incorrect information or clerical
+          mistake may result in cancellation of admission.
         </div>
       </div>
     </div>
   );
 };
 
-// --- STYLES (No changes needed, keeping your design) ---
-const pageWrapper = {
+/* ---------- STYLES ---------- */
+
+const wrapper = {
   width: "100%",
-  margin: 0,
-  padding: 0,
-  backgroundColor: "#fff",
+  background: "#fff",
+  minHeight: "100vh",
 };
-const contentArea = {
-  padding: "40px 20px",
-  width: "100%",
-  maxWidth: "1200px",
+
+const hero = {
+  background: "#1a237e",
+  color: "white",
+  textAlign: "center",
+  padding: "70px 20px",
+};
+
+const heroTitle = {
+  fontSize: "38px",
+  fontWeight: "800",
+};
+
+const heroText = {
+  marginTop: "10px",
+  opacity: "0.9",
+};
+
+const divider = {
+  width: "60px",
+  height: "4px",
+  background: "white",
+  margin: "18px auto",
+};
+
+const container = {
+  maxWidth: "1100px",
   margin: "0 auto",
+  padding: "60px 20px",
 };
-const headerTextWrapper = {
-  marginBottom: "30px",
-  borderBottom: "1px solid #eee",
-  paddingBottom: "15px",
-};
-const subLabel = {
-  fontSize: "12px",
-  color: "#333",
-  fontWeight: "700",
-  margin: 0,
-};
-const headingStyle = {
-  fontSize: "36px",
-  color: "#1a237e",
-  fontWeight: "600",
-  marginTop: "5px",
-};
-const sectionBox = {
-  marginBottom: "40px",
+
+const section = {
+  marginBottom: "50px",
   padding: "25px",
-  border: "1px solid #f0f0f0",
-  borderRadius: "2px",
-  backgroundColor: "#fff",
+  border: "1px solid #eee",
+  borderRadius: "8px",
 };
-const subHeadingStyle = {
+
+const sectionTitle = {
   fontSize: "24px",
   color: "#1a237e",
   marginBottom: "20px",
-  borderBottom: "2px solid #f0f0f0",
-  paddingBottom: "10px",
-  fontWeight: "600",
 };
-const titleStyle = {
+
+const subTitle = {
   fontSize: "18px",
-  color: "#444",
-  fontWeight: "600",
+  marginBottom: "10px",
   marginTop: "20px",
-  marginBottom: "15px",
-};
-const listStyle = { listStyle: "none", padding: 0 };
-const listItemStyle = {
-  display: "flex",
-  alignItems: "flex-start",
-  marginBottom: "12px",
   color: "#444",
-  fontSize: "15px",
-  lineHeight: "1.6",
 };
-const bulletStyle = {
-  color: "#1a237e",
-  fontWeight: "bold",
-  marginRight: "12px",
+
+const list = {
+  paddingLeft: "20px",
+  lineHeight: "1.8",
+  color: "#444",
 };
-const docGrid = {
+
+const grid = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+  gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
   gap: "12px",
   marginTop: "15px",
 };
+
 const docCard = {
-  padding: "15px",
-  backgroundColor: "#fcfcfc",
+  padding: "14px",
+  background: "#f8faff",
+  borderLeft: "4px solid #1a237e",
+  borderRadius: "6px",
   fontSize: "14px",
-  border: "1px solid #eee",
-  borderLeft: "5px solid #1a237e",
-  color: "#333",
 };
-const infoText = { fontStyle: "italic", color: "#666", marginBottom: "20px" };
+
+const infoText = {
+  fontStyle: "italic",
+  color: "#666",
+};
+
 const noteBox = {
-  padding: "25px",
-  backgroundColor: "#fff8e1",
+  marginTop: "40px",
+  padding: "20px",
+  background: "#fff8e1",
+  borderLeft: "5px solid #f0ad4e",
+  borderRadius: "6px",
   color: "#856404",
-  border: "1px solid #ffe082",
-  borderRadius: "2px",
-  fontSize: "14px",
 };
 
 export default AppProcessPage;

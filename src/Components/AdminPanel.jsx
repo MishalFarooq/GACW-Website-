@@ -1,24 +1,28 @@
 import React, { useState } from "react";
 import {
   X,
-  Send,
   Trash2,
   Megaphone,
   Calendar,
   Paperclip,
-  FileText,
-  Image as ImageIcon,
+  Send
 } from "lucide-react";
+
+import { useNavigate } from "react-router-dom";
+
 import { db } from "../firebase";
 import {
   collection,
   addDoc,
   deleteDoc,
   doc,
-  serverTimestamp,
+  serverTimestamp
 } from "firebase/firestore";
 
-export default function AdminPanel({ notices, events, onClose }) {
+export default function AdminPanel({ notices, events }) {
+
+  const navigate = useNavigate();
+
   const [activeTab, setActiveTab] = useState("notices");
   const [title, setTitle] = useState("");
   const [msg, setMsg] = useState("");
@@ -28,42 +32,45 @@ export default function AdminPanel({ notices, events, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!title) return alert("Title is required!");
+
     setLoading(true);
 
     try {
+
       let uploadedFileUrl = "";
 
-      if (file) {
+      /* Upload file ONLY for notices */
+      if (activeTab === "notices" && file) {
+
         const formData = new FormData();
-        // 401 Error se bachne ke liye preset pehle add karein
         formData.append("upload_preset", "portal_preset");
         formData.append("file", file);
         formData.append("cloud_name", "dset5b29x");
 
-        // Note: Headers hataye gaye hain taake 401 error na aaye
         const response = await fetch(
           "https://api.cloudinary.com/v1_1/dset5b29x/auto/upload",
-          { method: "POST", body: formData },
+          { method: "POST", body: formData }
         );
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(
-            errorData.error.message || "Cloudinary upload failed",
-          );
-        }
 
         const fileData = await response.json();
         uploadedFileUrl = fileData.secure_url;
       }
 
-      const collectionName = activeTab === "notices" ? "notices" : "events";
+      const collectionName =
+        activeTab === "notices" ? "notices" : "events";
+
       const payload = {
         title,
         msg,
         fileUrl: uploadedFileUrl,
-        fileType: file?.type.includes("pdf") ? "pdf" : "image",
+        fileType:
+          activeTab === "notices"
+            ? file?.type?.includes("pdf")
+              ? "pdf"
+              : "image"
+            : null,
         createdAt: serverTimestamp(),
         date:
           activeTab === "events"
@@ -71,8 +78,8 @@ export default function AdminPanel({ notices, events, onClose }) {
             : new Date().toLocaleDateString("en-GB", {
                 day: "2-digit",
                 month: "short",
-                year: "numeric",
-              }),
+                year: "numeric"
+              })
       };
 
       await addDoc(collection(db, collectionName), payload);
@@ -81,139 +88,184 @@ export default function AdminPanel({ notices, events, onClose }) {
       setMsg("");
       setDate("");
       setFile(null);
+
       alert(`${activeTab === "notices" ? "Notice" : "Event"} Published!`);
+
     } catch (error) {
+
       alert("Error: " + error.message);
+
     } finally {
+
       setLoading(false);
+
     }
   };
 
   const handleDelete = async (id, type) => {
-    if (
-      window.confirm(
-        `Delete this ${type === "notices" ? "Notice" : "Event"} permanently?`,
-      )
-    ) {
-      try {
-        await deleteDoc(doc(db, type, id));
-      } catch (error) {
-        alert("Delete failed: " + error.message);
-      }
-    }
+
+    if (!window.confirm("Delete permanently?")) return;
+
+    await deleteDoc(doc(db, type, id));
   };
 
-  return (
-    /* Background Transparency: bg-black/40 aur backdrop-blur-sm zimmadar hain */
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[9999] flex justify-end">
-      {/* Click outside to close (Optional but professional) */}
-      <div className="absolute inset-0" onClick={onClose}></div>
+return (
+  <div className="min-h-screen w-full bg-slate-50 flex justify-center ">
 
-      <div className="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col p-6 animate-in slide-in-from-right duration-300">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-6 border-b pb-4">
-          <div>
-            <h2 className="text-xl font-black text-indigo-700 uppercase tracking-tight">
-              GACW Control
-            </h2>
-            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
-              Management Portal
-            </p>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-2 text-slate-300 hover:text-red-500 transition-all"
-          >
-            <X size={24} />
-          </button>
+    <div className="w-full max-w-6xl bg-white min-h-screen shadow-xl flex flex-col mt-12">
+
+      {/* HEADER */}
+      <div className="flex items-center justify-between px-8 py-6 border-b">
+
+        <div>
+          <h2 className="text-xl font-black text-indigo-700">
+            GACW Admin Panel
+          </h2>
+          <p className="text-xs text-slate-400">
+            College Management System
+          </p>
         </div>
 
-        {/* Form aur List... (Baqi code same hai) */}
-        {/* ... (Tab Switcher, Form, Live List) ... */}
-        {/* Note: Inka logic aapka pehle hi perfect tha */}
+        <button
+          onClick={() => navigate("/admin")}
+          className="text-slate-400 hover:text-red-500"
+        >
+          <X size={22} />
+        </button>
 
-        {/* Aapka baqi code jo form aur list render karta hai yahan aayega */}
-        <div className="flex gap-2 mb-6 bg-slate-100 p-1 rounded-2xl">
-          <button
-            onClick={() => setActiveTab("notices")}
-            className={`flex-1 py-2.5 rounded-xl font-bold text-[11px] flex items-center justify-center gap-2 transition-all ${activeTab === "notices" ? "bg-white shadow-sm text-indigo-700" : "text-slate-500 hover:text-indigo-400"}`}
-          >
-            <Megaphone size={14} /> NOTICES
-          </button>
-          <button
-            onClick={() => setActiveTab("events")}
-            className={`flex-1 py-2.5 rounded-xl font-bold text-[11px] flex items-center justify-center gap-2 transition-all ${activeTab === "events" ? "bg-white shadow-sm text-pink-600" : "text-slate-500 hover:text-pink-400"}`}
-          >
-            <Calendar size={14} /> EVENTS
-          </button>
-        </div>
+      </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4 mb-8">
+      {/* TABS */}
+      <div className="flex gap-3 px-8 pt-6">
+
+        <button
+          onClick={() => setActiveTab("notices")}
+          className={`flex-1 py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 ${
+            activeTab === "notices"
+              ? "bg-indigo-600 text-white"
+              : "bg-slate-100 text-slate-500"
+          }`}
+        >
+          <Megaphone size={16} /> Notices
+        </button>
+
+        <button
+          onClick={() => setActiveTab("events")}
+          className={`flex-1 py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 ${
+            activeTab === "events"
+              ? "bg-pink-600 text-white"
+              : "bg-slate-100 text-slate-500"
+          }`}
+        >
+          <Calendar size={16} /> Events
+        </button>
+
+      </div>
+
+      {/* FORM */}
+      <form
+        onSubmit={handleSubmit}
+        className="px-8 py-6 space-y-4 border-b"
+      >
+
+        <input
+          className="w-full border rounded-xl p-3 text-sm outline-none focus:ring-2 ring-indigo-200"
+          placeholder="Title..."
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+
+        {activeTab === "events" && (
           <input
-            className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 ring-indigo-500/20 text-sm font-medium"
-            placeholder={`${activeTab === "notices" ? "Notice" : "Event"} Title...`}
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            className="w-full border rounded-xl p-3 text-sm outline-none focus:ring-2 ring-pink-200"
+            placeholder="Event Date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
           />
-          {activeTab === "events" && (
-            <input
-              className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 ring-pink-500/20 text-sm font-medium"
-              placeholder="Event Date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-            />
-          )}
-          <textarea
-            className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 ring-indigo-500/20 text-sm h-24 resize-none"
-            placeholder="Write details here..."
-            value={msg}
-            onChange={(e) => setMsg(e.target.value)}
-          />
+        )}
 
-          <label
-            className={`flex items-center gap-3 p-4 border-2 border-dashed rounded-2xl cursor-pointer transition-all ${file ? "border-green-200 bg-green-50" : "border-slate-200 bg-slate-50 hover:border-indigo-300"}`}
-          >
-            <Paperclip className="text-slate-400" />
+        <textarea
+          className="w-full border rounded-xl p-3 text-sm h-24 resize-none outline-none focus:ring-2 ring-indigo-200"
+          placeholder="Write message..."
+          value={msg}
+          onChange={(e) => setMsg(e.target.value)}
+        />
+
+        {activeTab === "notices" && (
+          <label className="flex items-center gap-3 border-2 border-dashed p-4 rounded-xl cursor-pointer bg-slate-50 hover:border-indigo-400">
+
+            <Paperclip size={18} className="text-slate-400" />
+
             <div className="flex-1">
-              <p className="text-[11px] font-bold text-slate-400 uppercase">
-                {file ? "File Ready" : "Attachment"}
+              <p className="text-xs font-semibold text-slate-500">
+                Attachment
               </p>
-              <p className="text-xs text-slate-600 truncate">
-                {file ? file.name : "Image or PDF"}
+              <p className="text-xs text-slate-400 truncate">
+                {file ? file.name : "Upload Image or PDF"}
               </p>
             </div>
+
             <input
               type="file"
               className="hidden"
               accept="image/*,application/pdf"
               onChange={(e) => setFile(e.target.files[0])}
             />
+
           </label>
+        )}
 
-          <button
-            type="submit"
-            disabled={loading}
-            className={`w-full py-4 rounded-2xl font-black text-xs uppercase tracking-widest text-white shadow-lg flex items-center justify-center gap-3 transition-all ${loading ? "bg-slate-300" : activeTab === "notices" ? "bg-indigo-600" : "bg-pink-600"}`}
+        <button
+          disabled={loading}
+          className={`w-full py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 text-white ${
+            loading
+              ? "bg-slate-400"
+              : activeTab === "notices"
+              ? "bg-indigo-600 hover:bg-indigo-700"
+              : "bg-pink-600 hover:bg-pink-700"
+          }`}
+        >
+          <Send size={16} />
+          {loading ? "Publishing..." : "Publish"}
+        </button>
+
+      </form>
+
+      {/* LIST */}
+      <div className="flex-1 overflow-y-auto px-8 py-6">
+
+        {(activeTab === "notices" ? notices : events)?.map((item) => (
+
+          <div
+            key={item.id}
+            className="flex justify-between items-center border-b py-4"
           >
-            {loading ? "Publishing..." : "Confirm & Publish"}
-          </button>
-        </form>
 
-        {/* Database List (Simplified) */}
-        <div className="flex-1 overflow-y-auto">
-          {(activeTab === "notices" ? notices : events)?.map((item) => (
-            <div key={item.id} className="flex justify-between p-3 border-b">
-              <span className="text-xs font-bold">{item.title}</span>
-              <button
-                onClick={() => handleDelete(item.id, activeTab)}
-                className="text-red-400"
-              >
-                <Trash2 size={14} />
-              </button>
+            <div>
+              <p className="text-sm font-semibold text-slate-700">
+                {item.title}
+              </p>
+
+              <p className="text-xs text-slate-400">
+                {item.date}
+              </p>
             </div>
-          ))}
-        </div>
+
+            <button
+              onClick={() => handleDelete(item.id, activeTab)}
+              className="text-red-500 hover:text-red-700"
+            >
+              <Trash2 size={16} />
+            </button>
+
+          </div>
+
+        ))}
+
       </div>
+
     </div>
-  );
+
+  </div>
+);
 }

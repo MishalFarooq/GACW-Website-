@@ -27,8 +27,10 @@ import {
   Building2,
 } from "lucide-react";
 import "./App.css";
+import { FaFacebook } from "react-icons/fa";
 
 // --- Components ---
+import HeroSlider from "./Components/HeroSlider";
 import Navbar from "./Components/Navbar";
 import LoginModal from "./Components/LoginModal";
 import AdminPanel from "./Components/AdminPanel";
@@ -48,6 +50,8 @@ import AboutUsMain from "./Components/About/AboutUsMain";
 import History from "./Components/About/History";
 import VisionMission from "./Components/About/VisionMission";
 import PrincipalMessage from "./Components/About/PrincipalMessage";
+import VicePrincipalMessage from "./Components/About/vicePrincipalMessage";
+import ProtectedRoute from "./Components/ProtectedRoute";
 import OurStaff from "./Components/About/OurStaff";
 import RulesRegulations from "./Components/About/RulesRegulations";
 import WhyUs from "./Components/About/WhyUs";
@@ -68,9 +72,9 @@ import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 const HomeGallery = () => {
   const visuals = [
     { id: 1, title: "Science Exhibition", img: "/Science exhibition.jpg" },
-    { id: 2, title: "Funfair 2025", img: "/funfair1.jpeg" },
-    { id: 3, title: "Sports Day", img: "/Science exhibition1.jpg" },
-    { id: 4, title: "Kashmir Day", img: "/kashmir.png" },
+    { id: 2, title: "Funfair 2025", img: "/fun.jpeg" },
+    { id: 3, title: "Sports Day", img: "/SportsDay1.jpeg" },
+    { id: 4, title: "PTM", img: "/PTM.jpeg" },
   ];
 
   return (
@@ -169,51 +173,7 @@ function App() {
   const HomePage = () => (
     <div style={{ backgroundColor: "#fff" }}>
       {/* 1. Hero Section */}
-      <section id="home" style={heroSectionStyle}>
-        <div style={heroOverlayStyle}>
-          <p
-            style={{
-              letterSpacing: "4px",
-              fontSize: "14px",
-              marginBottom: "10px",
-            }}
-          >
-            ESTABLISHED 2026
-          </p>
-          <h1
-            className="hero-title"
-            style={{ fontSize: "clamp(40px, 8vw, 70px)", fontWeight: "900" }}
-          >
-            GACW CHUNG
-          </h1>
-          <p
-            className="hero-subtitle"
-            style={{
-              maxWidth: "700px",
-              margin: "0 auto",
-              fontSize: "18px",
-              opacity: "0.9",
-            }}
-          >
-            Nurturing Excellence, Empowering Women. Join Lahore's Premier
-            Educational Institution.
-          </p>
-          <div style={{ marginTop: "30px" }}>
-            <Link
-              to="/admissions/apply"
-              className="hero-btn"
-              style={{
-                padding: "15px 40px",
-                borderRadius: "50px",
-                fontWeight: "bold",
-              }}
-            >
-              Apply Online 2025-26
-            </Link>
-          </div>
-        </div>
-      </section>
-
+      <HeroSlider />
       <NoticeBoard notices={notices} />
 
       {/* 2. Academics Slider */}
@@ -415,7 +375,7 @@ function App() {
               },
             ].map((card, idx) => (
               <Link key={idx} to={card.path} style={{ textDecoration: "none" }}>
-                <div className="home-life-card" style={lifeSmallCardStyle}>
+                <div className="home-life-card" >
                   <div style={{ color: card.color, marginBottom: "12px" }}>
                     {card.icon}
                   </div>
@@ -504,27 +464,6 @@ function App() {
           </div>
         </div>
       </section>
-
-      <footer id="contact" style={contactSectionStyle}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: "24px", marginBottom: "15px" }}>
-            GOVT. ASSOCIATE COLLEGE FOR WOMEN
-          </h2>
-          <p style={{ opacity: "0.8" }}>Main Multan Road, Chung, Lahore</p>
-          <div
-            style={{
-              marginTop: "20px",
-              display: "flex",
-              justifyContent: "center",
-              gap: "30px",
-              flexWrap: "wrap",
-            }}
-          >
-            <span>📞 (042) 1234567</span>
-            <span>📧 info@gacwchung.edu.pk</span>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 
@@ -532,25 +471,36 @@ function App() {
     <Router>
       <ScrollToTop />
       <Navbar />
-      {isAdmin && (
-        <AdminPanel
-          notices={notices}
-          events={events}
-          onClose={() => setIsAdmin(false)}
-        />
-      )}
+
+
+
       <Routes>
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute isAdmin={isAdmin}>
+              <AdminPanel notices={notices} events={events} />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/" element={<HomePage />} />
-        <Route path="/about/*" element={<AboutUsMain />} />
+        <Route path="/about" element={<AboutUsMain />} />
+        <Route path="/about/why-us" element={<WhyUs />} />
+        <Route path="/about/history" element={<History />} />
+        <Route path="/about/vision-mission" element={<VisionMission />} />
+        <Route path="/about/principal-message" element={<PrincipalMessage />} />
+        <Route path="/about/vice-principal-message" element={<VicePrincipalMessage />} />
+        <Route path="/about/staff" element={<OurStaff />} />
+        <Route path="/about/rules" element={<RulesRegulations />} />
+
         <Route path="/academics/*" element={<AcademicsMain />} />
         <Route path="/academics/programs" element={<ProgramsPage />} />
         <Route path="/academics/faculty" element={<FacultyPage />} />
-        <Route
-          path="/academics/class-schedule"
-          element={<ClassSchedulePage />}
-        />
+        <Route path="/academics/timetable" element={<TimetablePage />} />
+        <Route path="/academics/class-schedule" element={<ClassSchedulePage />} />
         <Route path="/academics/exams" element={<ExamSchedulePage />} />
         <Route path="/academics/results" element={<ResultsPage />} />
+        <Route path="/admin" element={<LoginModal setIsAdmin={setIsAdmin} />} />
         <Route path="/admissions/*" element={<AdmissionsMain />} />
         <Route path="/admissions/forms" element={<ProspectusPage />} />
         <Route path="/admissions/process" element={<AppProcessPage />} />
@@ -558,32 +508,79 @@ function App() {
         <Route path="/admissions/fee" element={<FeePage />} />
         <Route path="/admissions/eligibility" element={<EligibilityPage />} />
         <Route path="/admissions/apply" element={<ApplyOnlinePage />} />
+
         <Route path="/life-at-college" element={<LifeAtCollegeMain />} />
         <Route path="/life-at-college/facilities" element={<Facilities />} />
         <Route path="/life-at-college/gallery" element={<Gallery />} />
-        <Route
-          path="/life-at-college/events"
-          element={<Events events={events} />}
-        />
-        <Route
-          path="/life-at-college/all-notices"
-          element={<AllNotices notices={notices} />}
-        />
-        <Route
-          path="/admin"
-          element={
-            isAdmin ? (
-              <Navigate to="/" />
-            ) : (
-              <LoginModal
-                isOpen={true}
-                onLogin={() => setIsAdmin(true)}
-                onClose={() => window.history.back()}
-              />
-            )
-          }
-        />
+        <Route path="/life-at-college/events" element={<Events events={events} />} />
+        <Route path="/life-at-college/all-notices" element={<AllNotices notices={notices} />} />
       </Routes>
+
+      {/* MAP SECTION */}
+      <section style={mapSectionStyle}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "30px" }}>
+            <p style={subHeadingStyle}>LOCATION</p>
+            <h2 style={mainHeadingStyle}>Find Us</h2>
+          </div>
+
+          <div style={mapWrapperStyle}>
+            <iframe
+              title="College Location"
+              src="https://www.google.com/maps?q=31.417676,74.244633&z=15&output=embed"
+              width="100%"
+              height="420"
+              style={{ border: 0, borderRadius: "12px" }}
+              loading="lazy"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer id="contact" style={contactSectionStyle}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "24px", marginBottom: "15px" }}>
+            GOVT. ASSOCIATE COLLEGE (W) CHUNG, LAHORE
+          </h2>
+
+          <p style={{ opacity: "0.8" }}>Main Multan Road, Chung, Lahore</p>
+
+          <div
+            style={{
+              marginTop: "20px",
+              display: "flex",
+              justifyContent: "center",
+              gap: "30px",
+              flexWrap: "wrap",
+              alignItems: "center",
+            }}
+          >
+            <span>📞 (042) 35230206</span>
+            <span>📧 gdcwchung@gmail.com</span>
+
+            <a
+              href="https://www.facebook.com/share/p/1CA8ueViCp/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                color: "#1877F2",
+                textDecoration: "none",
+                fontSize: "18px",
+                fontWeight: "500"
+              }}
+            >
+              <FaFacebook size={22} />
+              Facebook
+            </a>
+          </div>
+        </div>
+      </footer>
+
     </Router>
   );
 }
@@ -656,6 +653,17 @@ const mainHeadingStyle = {
   color: "#1a237e",
   margin: "5px 0",
   fontWeight: "800",
+};
+const mapSectionStyle = {
+  padding: "80px 5%",
+  backgroundColor: "#f8faff",
+};
+
+const mapWrapperStyle = {
+  width: "100%",
+  borderRadius: "12px",
+  overflow: "hidden",
+  boxShadow: "0 6px 20px rgba(0,0,0,0.08)",
 };
 const sliderWrapper = {
   overflowX: "auto",

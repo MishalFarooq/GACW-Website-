@@ -9,85 +9,81 @@ const AboutUsMain = () => {
     { title: "Vision & Mission", path: "/about/vision-mission" },
     { title: "Principal's Message", path: "/about/principal-message" },
     { title: "Our Staff", path: "/about/staff" },
-    { title: "Rules and Regulations", path: "/about/rules" },
+    { title: "Rules & Regulations", path: "/about/rules" },
   ];
 
   return (
-    <div style={pageWrapper}>
-      {/* Home / About Us Breadcrumb */}
+    <div style={wrapper}>
       <Breadcrumbs links={[{ name: "About Us" }]} />
 
-      <div style={contentArea}>
-        <h1 style={headingStyle}>About Us</h1>
+      <div style={container}>
+        <h1 style={heading}>About Us</h1>
 
-        <ul style={listStyle}>
-          {links.map((link, index) => (
-            <li key={index} style={listItemStyle}>
-              <span style={bulletStyle}>•</span>
-              <Link
-                to={link.path}
-                style={linkStyle}
-                onMouseOver={(e) =>
-                  (e.target.style.textDecoration = "underline")
-                }
-                onMouseOut={(e) => (e.target.style.textDecoration = "none")}
-              >
-                {link.title}
-              </Link>
-            </li>
+        <div style={grid}>
+          {links.map((item, index) => (
+            <Link key={index} to={item.path} style={card}>
+              <span style={icon}>›</span>
+              <span style={title}>{item.title}</span>
+            </Link>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );
 };
 
-// --- STYLES (Exactly matching Admissions Page) ---
+/* ---------- STYLES ---------- */
 
-const pageWrapper = {
+const wrapper = {
   width: "100%",
+  background: "#fff",
   minHeight: "80vh",
-  backgroundColor: "#fff",
 };
 
-const contentArea = {
-  padding: "40px 20px", // Side spacing extra khatam, exactly like admissions
-  width: "100%",
+const container = {
+  maxWidth: "1100px",
+  margin: "0 auto",
+  padding: "40px 20px",
 };
 
-const headingStyle = {
-  fontSize: "30px",
-  color: "#333",
-  borderBottom: "1px solid #eee",
+const heading = {
+  fontSize: "32px",
+  fontWeight: "700",
+  color: "#1a237e",
+  marginBottom: "30px",
+  borderBottom: "2px solid #eee",
   paddingBottom: "10px",
-  marginBottom: "25px",
-  fontWeight: "500",
-  width: "100%",
 };
 
-const listStyle = {
-  listStyle: "none",
-  padding: 0,
+const grid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+  gap: "20px",
 };
 
-const listItemStyle = {
+const card = {
   display: "flex",
   alignItems: "center",
-  marginBottom: "15px",
-};
-
-const bulletStyle = {
-  color: "#1a237e",
-  fontSize: "22px",
-  marginRight: "12px",
-};
-
-const linkStyle = {
-  color: "#1a237e",
+  gap: "12px",
+  padding: "18px 20px",
+  background: "#fff",
+  borderRadius: "10px",
+  border: "1px solid #eee",
   textDecoration: "none",
-  fontSize: "18px",
-  fontWeight: "500",
   transition: "0.3s",
+  boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+};
+
+const icon = {
+  fontSize: "22px",
+  color: "#1a237e",
+  fontWeight: "bold",
+};
+
+const title = {
+  fontSize: "16px",
+  color: "#333",
+  fontWeight: "600",
 };
 
 export default AboutUsMain;

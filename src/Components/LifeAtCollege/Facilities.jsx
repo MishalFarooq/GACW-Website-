@@ -14,43 +14,43 @@ const Facilities = () => {
   const facilitiesData = [
     {
       title: "Library",
-      icon: <BookOpen size={32} color="#1a237e" />,
-      desc: "M.A.O. College Library has a stock of valuable books available to its students. Students are issued a Library Card to borrow books. Books must be returned within 14 days or a fine of Rs. 2/day applies. In case of loss, the book must be replaced or double cost paid. A quiet reading room is attached for students.",
+      icon: <BookOpen size={30} />,
+      desc: "A well-stocked library with academic and reference books. Students can borrow books using their library cards and access a quiet reading room for study.",
     },
     {
       title: "Computer Lab",
-      icon: <Monitor size={32} color="#1a237e" />,
-      desc: "The computer lab serves as the center for teaching computer skills by specialist teachers. It is also used for research and creating technology-based projects by various classes.",
+      icon: <Monitor size={30} />,
+      desc: "Modern computer laboratory for teaching computer skills, research work, and digital learning activities.",
     },
     {
       title: "Masjid",
-      icon: <Moon size={32} color="#1a237e" />,
-      desc: "To facilitate Islamic teachings and the observance of the five obligatory prayers, a beautiful masjid is located inside the campus.",
+      icon: <Moon size={30} />,
+      desc: "A beautiful masjid inside the campus allowing students and staff to perform daily prayers conveniently.",
     },
     {
       title: "Dispensary",
-      icon: <PlusSquare size={32} color="#1a237e" />,
-      desc: "A well-equipped dispensary is available for first-aid emergencies. An MBBS doctor visits the college periodically for consultation.",
+      icon: <PlusSquare size={30} />,
+      desc: "A basic health facility with first-aid equipment. An MBBS doctor visits periodically for consultation.",
     },
     {
       title: "Transportation",
-      icon: <Bus size={32} color="#1a237e" />,
-      desc: "Transport facility is available on specific routes. Charges are included in the fee, and passes are issued by the Transport Office at the start of the academic year.",
+      icon: <Bus size={30} />,
+      desc: "Transport facility available on selected routes for students. Passes are issued by the Transport Office.",
     },
     {
       title: "Canteen",
-      icon: <Coffee size={32} color="#1a237e" />,
-      desc: "Fresh and hygienic food is available at subsidized rates for students, teachers, and staff members.",
+      icon: <Coffee size={30} />,
+      desc: "Hygienic and fresh food available at affordable prices for students, teachers, and staff.",
     },
     {
-      title: "Filtration Plant",
-      icon: <Droplets size={32} color="#1a237e" />,
-      desc: "The water filtration plants provide pure, safe, and reliable drinking water across the campus.",
+      title: "Water Filtration",
+      icon: <Droplets size={30} />,
+      desc: "Water filtration plants installed on campus to provide clean and safe drinking water.",
     },
   ];
 
   return (
-    <div style={pageWrapper}>
+    <div style={wrapper}>
       <Breadcrumbs
         links={[
           { name: "Life at College", path: "/life-at-college" },
@@ -58,19 +58,23 @@ const Facilities = () => {
         ]}
       />
 
-      <div style={contentArea}>
-        <h1 style={headingStyle}>Campus Facilities</h1>
-        <p style={subTextStyle}>
-          We provide a range of modern facilities to ensure a comfortable and
-          productive learning environment for our students.
+      {/* HEADER */}
+      <section style={hero}>
+        <h1 style={heroTitle}>Campus Facilities</h1>
+        <div style={divider}></div>
+        <p style={heroText}>
+          Our college provides modern facilities to support academic learning
+          and student well-being.
         </p>
+      </section>
 
-        <div style={gridStyle}>
+      <div style={container}>
+        <div style={grid}>
           {facilitiesData.map((item, index) => (
-            <div key={index} style={cardStyle} className="facility-card">
-              <div style={iconBoxStyle}>{item.icon}</div>
-              <h3 style={cardTitleStyle}>{item.title}</h3>
-              <p style={cardDescStyle}>{item.desc}</p>
+            <div key={index} style={card}>
+              <div style={iconBox}>{item.icon}</div>
+              <h3 style={title}>{item.title}</h3>
+              <p style={desc}>{item.desc}</p>
             </div>
           ))}
         </div>
@@ -79,70 +83,80 @@ const Facilities = () => {
   );
 };
 
-// --- STYLES ---
-const pageWrapper = {
+/* ---------- STYLES ---------- */
+
+const wrapper = {
   width: "100%",
   minHeight: "100vh",
-  backgroundColor: "#f9f9f9",
-};
-const contentArea = {
-  padding: "40px 5%",
-  maxWidth: "1200px",
-  margin: "0 auto",
-};
-const headingStyle = {
-  fontSize: "32px",
-  color: "#1a237e",
-  fontWeight: "bold",
-  marginBottom: "10px",
-};
-const subTextStyle = {
-  fontSize: "16px",
-  color: "#666",
-  marginBottom: "40px",
-  maxWidth: "800px",
+  background: "#f9f9f9",
 };
 
-const gridStyle = {
+const hero = {
+  background: "#1a237e",
+  color: "white",
+  textAlign: "center",
+  padding: "70px 20px",
+};
+
+const heroTitle = {
+  fontSize: "36px",
+  fontWeight: "800",
+};
+
+const heroText = {
+  marginTop: "10px",
+  opacity: "0.9",
+};
+
+const divider = {
+  width: "60px",
+  height: "4px",
+  background: "white",
+  margin: "18px auto",
+};
+
+const container = {
+  maxWidth: "1100px",
+  margin: "0 auto",
+  padding: "60px 20px",
+};
+
+const grid = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+  gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))",
   gap: "25px",
 };
 
-const cardStyle = {
-  backgroundColor: "#fff",
-  padding: "30px",
-  borderRadius: "8px",
-  boxShadow: "0 4px 6px rgba(0,0,0,0.05)",
+const card = {
+  background: "#fff",
+  padding: "25px",
+  borderRadius: "10px",
   border: "1px solid #eee",
-  transition: "transform 0.3s ease",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "flex-start",
+  boxShadow: "0 6px 18px rgba(0,0,0,0.05)",
 };
 
-const iconBoxStyle = {
-  width: "60px",
-  height: "60px",
-  backgroundColor: "#f0f2ff",
+const iconBox = {
+  width: "55px",
+  height: "55px",
+  background: "#f0f2ff",
   borderRadius: "50%",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  marginBottom: "20px",
+  color: "#1a237e",
+  marginBottom: "15px",
 };
 
-const cardTitleStyle = {
-  fontSize: "20px",
-  color: "#333",
-  marginBottom: "12px",
-  fontWeight: "600",
+const title = {
+  fontSize: "18px",
+  color: "#1a237e",
+  marginBottom: "8px",
 };
-const cardDescStyle = {
+
+const desc = {
   fontSize: "14px",
   color: "#555",
   lineHeight: "1.6",
-  margin: 0,
 };
 
 export default Facilities;

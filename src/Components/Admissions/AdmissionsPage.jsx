@@ -1,88 +1,119 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// Breadcrumbs import path bilkul sahi hai
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const AdmissionsPage = () => {
   const admissionLinks = [
-    { name: "Forms and Prospectus", path: "/admissions/forms" },
-    { name: "Application Process", path: "/admissions/process" },
-    { name: "Rules and Regulations", path: "/admissions/rules" },
-    { name: "Fee Structure", path: "/admissions/fee" },
-    { name: "Eligibility Criteria", path: "/admissions/eligibility" },
-    { name: "Apply Online", path: "/admissions/apply" },
+    { name: "Forms & Prospectus", path: "/admissions/forms", desc: "Download admission forms and prospectus." },
+    { name: "Application Process", path: "/admissions/process", desc: "Step-by-step guide for admission." },
+    { name: "Rules & Regulations", path: "/admissions/rules", desc: "Important admission policies." },
+    { name: "Fee Structure", path: "/admissions/fee", desc: "Complete details of academic fees." },
+    { name: "Eligibility Criteria", path: "/admissions/eligibility", desc: "Check admission requirements." },
+    { name: "Apply Online", path: "/admissions/apply", desc: "Submit your admission application." },
   ];
 
   return (
-    <div style={pageWrapper}>
-      {/* FIX: 'pageName' ki jagah 'links' array bheja hai.
-         Yahan 'Home' nahi likha kyunki Breadcrumbs.jsx mein wo pehle se hai.
-      */}
+    <div style={wrapper}>
       <Breadcrumbs links={[{ name: "Admissions" }]} />
 
-      <div style={contentArea}>
-        <h1 style={headingStyle}>Admissions</h1>
+      {/* HEADER */}
+      <section style={hero}>
+        <h1 style={heroTitle}>Admissions</h1>
+        <div style={divider}></div>
+        <p style={heroText}>
+          Begin your academic journey at Government Associate College for Women, Chung.
+        </p>
+      </section>
 
-        <ul style={listStyle}>
+      {/* CONTENT */}
+      <div style={container}>
+        <div style={grid}>
           {admissionLinks.map((item, index) => (
-            <li key={index} style={listItemStyle}>
-              <span style={bulletStyle}>•</span>
-              <Link
-                to={item.path}
-                style={linkStyle}
-                onMouseOver={(e) =>
-                  (e.target.style.textDecoration = "underline")
-                }
-                onMouseOut={(e) => (e.target.style.textDecoration = "none")}
-              >
-                {item.name}
-              </Link>
-            </li>
+            <Link key={index} to={item.path} style={card}>
+              <h3 style={cardTitle}>{item.name}</h3>
+              <p style={cardDesc}>{item.desc}</p>
+              <span style={cardLink}>View Details →</span>
+            </Link>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );
 };
 
-// --- STYLES (Wahi rahenge) ---
-const pageWrapper = {
+/* ---------- STYLES ---------- */
+
+const wrapper = {
   width: "100%",
-  minHeight: "80vh",
-  backgroundColor: "#fff",
+  minHeight: "100vh",
+  background: "#fff",
 };
 
-const contentArea = {
-  padding: "40px 20px",
-  width: "100%",
+const hero = {
+  background: "#1a237e",
+  color: "white",
+  textAlign: "center",
+  padding: "70px 20px",
 };
 
-const headingStyle = {
-  fontSize: "30px",
-  color: "#333",
-  borderBottom: "1px solid #eee",
-  paddingBottom: "10px",
-  marginBottom: "25px",
-  fontWeight: "500",
-  width: "100%",
+const heroTitle = {
+  fontSize: "38px",
+  fontWeight: "800",
 };
 
-const listStyle = { listStyle: "none", padding: 0 };
-
-const listItemStyle = {
-  display: "flex",
-  alignItems: "center",
-  marginBottom: "15px",
+const heroText = {
+  marginTop: "10px",
+  opacity: "0.9",
 };
 
-const bulletStyle = { color: "#1a237e", fontSize: "22px", marginRight: "12px" };
+const divider = {
+  width: "60px",
+  height: "4px",
+  background: "white",
+  margin: "18px auto",
+};
 
-const linkStyle = {
-  color: "#1a237e",
+const container = {
+  maxWidth: "1100px",
+  margin: "0 auto",
+  padding: "60px 20px",
+};
+
+const grid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+  gap: "25px",
+};
+
+const card = {
+  background: "#fff",
+  padding: "30px",
+  borderRadius: "12px",
+  borderTop: "4px solid #1a237e",
   textDecoration: "none",
-  fontSize: "18px",
-  fontWeight: "500",
+  boxShadow: "0 6px 20px rgba(0,0,0,0.06)",
   transition: "0.3s",
+  display: "flex",
+  flexDirection: "column",
+  gap: "10px",
+};
+
+const cardTitle = {
+  color: "#1a237e",
+  fontSize: "20px",
+};
+
+const cardDesc = {
+  color: "#666",
+  fontSize: "15px",
+  lineHeight: "1.6",
+};
+
+const cardLink = {
+  marginTop: "10px",
+  color: "#1a237e",
+  fontWeight: "600",
+  fontSize: "14px",
 };
 
 export default AdmissionsPage;

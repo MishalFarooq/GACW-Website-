@@ -1,114 +1,144 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Building2, Calendar, Bell, Image } from "lucide-react";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const LifeAtCollegeMain = () => {
-  const listItems = [
-    { name: "Facilities", path: "/life-at-college/facilities" },
-    { name: "Events", path: "/life-at-college/events" },
-    { name: "Notice Board", path: "/life-at-college/all-notices" },
-    { name: "Gallery", path: "/life-at-college/gallery" },
+  const items = [
+    {
+      name: "Facilities",
+      path: "/life-at-college/facilities",
+      icon: <Building2 size={26} />,
+      desc: "Explore campus facilities and student services.",
+    },
+    {
+      name: "Events",
+      path: "/life-at-college/events",
+      icon: <Calendar size={26} />,
+      desc: "View upcoming and past college events.",
+    },
+    {
+      name: "Notice Board",
+      path: "/life-at-college/all-notices",
+      icon: <Bell size={26} />,
+      desc: "Latest announcements and official notices.",
+    },
+    {
+      name: "Gallery",
+      path: "/life-at-college/gallery",
+      icon: <Image size={26} />,
+      desc: "Photos from activities and college life.",
+    },
   ];
 
   return (
-    <div style={pageWrapper}>
-      {/* Blue background aur container khatam - Simple Clean Breadcrumb */}
-      <div style={breadcrumbRow}>
-        <Link to="/" style={breadcrumbLink}>
-          Home
-        </Link>{" "}
-        / <span style={breadcrumbCurrent}>Life at College</span>
-      </div>
+    <div style={wrapper}>
+      <Breadcrumbs links={[{ name: "Life at College" }]} />
 
-      <div style={contentArea}>
-        <h1 style={headingStyle}>Life at College</h1>
+      {/* Header */}
+      <section style={hero}>
+        <h1 style={heroTitle}>Life at College</h1>
+        <div style={divider}></div>
+        <p style={heroText}>
+          Discover campus life, events, facilities, and activities that enrich
+          student experience.
+        </p>
+      </section>
 
-        <ul style={listStyle}>
-          {listItems.map((item, index) => (
-            <li key={index} style={listItemStyle}>
-              <span style={bulletStyle}>•</span>
-              <Link
-                to={item.path}
-                style={linkStyle}
-                onMouseOver={(e) =>
-                  (e.target.style.textDecoration = "underline")
-                }
-                onMouseOut={(e) => (e.target.style.textDecoration = "none")}
-              >
-                {item.name}
-              </Link>
-            </li>
+      <div style={container}>
+        <div style={grid}>
+          {items.map((item, index) => (
+            <Link key={index} to={item.path} style={card}>
+              <div style={iconBox}>{item.icon}</div>
+              <h3 style={cardTitle}>{item.name}</h3>
+              <p style={cardDesc}>{item.desc}</p>
+              <span style={cardLink}>Explore →</span>
+            </Link>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );
 };
 
-// --- STYLES (Padding aur Containers khatam) ---
+/* ---------- STYLES ---------- */
 
-const pageWrapper = {
+const wrapper = {
   width: "100%",
-  backgroundColor: "#fff",
-  padding: "0 5%", // Sirf sides se minimal alignment
+  background: "#fff",
+  minHeight: "100vh",
 };
 
-const breadcrumbRow = {
-  fontSize: "13px",
-  color: "#333",
-  padding: "10px 0", // Minimum padding
-  borderBottom: "1px solid #f0f0f0", // Patli line Gallery page ki tarah
-  textAlign: "left",
+const hero = {
+  background: "#1a237e",
+  color: "white",
+  textAlign: "center",
+  padding: "70px 20px",
 };
 
-const breadcrumbLink = {
+const heroTitle = {
+  fontSize: "38px",
+  fontWeight: "800",
+};
+
+const heroText = {
+  marginTop: "10px",
+  opacity: "0.9",
+};
+
+const divider = {
+  width: "60px",
+  height: "4px",
+  background: "white",
+  margin: "18px auto",
+};
+
+const container = {
+  maxWidth: "1100px",
+  margin: "0 auto",
+  padding: "60px 20px",
+};
+
+const grid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+  gap: "20px",
+};
+
+const card = {
+  background: "#fff",
+  padding: "30px",
+  borderRadius: "12px",
+  borderTop: "4px solid #1a237e",
   textDecoration: "none",
-  color: "#000",
-  fontWeight: "500",
-};
-
-const breadcrumbCurrent = {
-  color: "#333",
-  marginLeft: "5px",
-};
-
-const contentArea = {
-  padding: "20px 0", // Top padding kam kar di, side padding zero
-  width: "100%",
-  textAlign: "left",
-};
-
-const headingStyle = {
-  fontSize: "30px",
-  color: "#0d1137", // Navy Blue color jaisa Gallery page par hai
-  margin: "0 0 20px 0",
-  fontWeight: "700",
-};
-
-const listStyle = {
-  listStyle: "none",
-  padding: 0,
-};
-
-const listItemStyle = {
+  boxShadow: "0 6px 20px rgba(0,0,0,0.06)",
   display: "flex",
-  alignItems: "center",
-  marginBottom: "5px", // Spacing kam kar di
-  paddingBottom: "5px",
-  width: "fit-content",
+  flexDirection: "column",
+  gap: "10px",
+  transition: "0.3s",
 };
 
-const bulletStyle = {
-  color: "#0056b3", // Gallery ki tarah blue bullet
+const iconBox = {
+  color: "#1a237e",
+};
+
+const cardTitle = {
   fontSize: "18px",
-  marginRight: "10px",
+  color: "#1a237e",
+  margin: 0,
 };
 
-const linkStyle = {
-  color: "#0056b3", // Gallery links ki tarah Blue
-  textDecoration: "none",
-  fontSize: "15px",
-  fontWeight: "500",
+const cardDesc = {
+  fontSize: "14px",
+  color: "#666",
+  lineHeight: "1.6",
+};
+
+const cardLink = {
+  marginTop: "10px",
+  color: "#1a237e",
+  fontWeight: "600",
+  fontSize: "14px",
 };
 
 export default LifeAtCollegeMain;

@@ -1,19 +1,33 @@
-/* --- Global Reset --- */
+/* ---------------- GLOBAL RESET ---------------- */
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body { 
-  overflow-x: hidden; 
-  width: 100%; 
-  background-color: #fff;
+body {
+  overflow-x: hidden;
+  width: 100%;
+  background: #ffffff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
 }
 
-/* --- Navbar Styling Fix --- */
+/* ---------------- CONTAINERS ---------------- */
+
+.section-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 80px 5%;
+}
+
+.section-light {
+  background: #f8faff;
+}
+
+/* ---------------- NAVBAR ---------------- */
+
 .navbar-main {
   background: white;
   padding: 10px 5%;
@@ -23,194 +37,334 @@ body {
   position: sticky;
   top: 0;
   z-index: 2000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  height: 80px; /* Consistent height */
+  height: 80px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
-.brand-name { font-size: clamp(14px, 4vw, 18px); font-weight: bold; color: #1a237e; }
-.brand-sub { font-size: 10px; color: #555; font-weight: 600; }
-
-/* Hamburger Icon - Laptop par hamesha hidden rahega */
-.hamburger-icon {
-  display: none; 
-  cursor: pointer;
+.brand-name {
+  font-size: clamp(14px, 3vw, 18px);
+  font-weight: 700;
   color: #1a237e;
-  z-index: 2100;
 }
 
-.nav-links-wrapper { 
-  display: flex; 
-  gap: clamp(10px, 2vw, 20px); 
-  align-items: center; 
+.brand-sub {
+  font-size: 10px;
+  color: #666;
+  font-weight: 600;
 }
 
-/* Nav Link Styles */
-.nav-item, .nav-links-wrapper a, .btnLinkStyle { 
-  text-decoration: none; 
-  color: #333; 
-  font-size: 11px; 
-  font-weight: 600; 
-  background: none; 
-  border: none; 
-  cursor: pointer; 
+/* ---------------- NAV LINKS ---------------- */
+
+.nav-links-wrapper {
+  display: flex;
+  gap: clamp(15px, 2vw, 25px);
+  align-items: center;
+}
+
+.nav-item,
+.nav-links-wrapper a,
+.btnLinkStyle {
+  text-decoration: none;
+  color: #333;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  background: none;
+  cursor: pointer;
   text-transform: uppercase;
   transition: 0.3s;
 }
 
-/* --- 1. ACADEMICS SLIDER --- */
+.nav-links-wrapper a:hover {
+  color: #1a237e;
+}
+
+/* ---------------- HAMBURGER ---------------- */
+
+.hamburger-icon {
+  display: none;
+  cursor: pointer;
+  color: #1a237e;
+}
+
+/* ---------------- HERO SECTION ---------------- */
+
+.hero-title {
+  letter-spacing: 1px;
+}
+
+.hero-btn {
+  background: #1a237e;
+  color: white;
+  border: none;
+  padding: 14px 35px;
+  border-radius: 40px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.hero-btn:hover {
+  background: #0d1137;
+  transform: translateY(-2px);
+}
+
+/* ---------------- ACADEMIC SLIDER ---------------- */
+
 .hide-scrollbar {
   overflow-x: auto;
   scrollbar-width: none;
   display: flex;
-  gap: 20px;
-  padding: 20px 10px;
-  -webkit-overflow-scrolling: touch;
+  gap: 25px;
+  padding: 15px 10px;
 }
-.hide-scrollbar::-webkit-scrollbar { display: none; }
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
 .uni-slider-card {
   background: white;
   width: 260px;
   min-height: 220px;
-  border-radius: 15px;
+  border-radius: 16px;
+  padding: 25px;
+  flex-shrink: 0;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 20px;
+  align-items: center;
+  gap: 10px;
+
   text-align: center;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+
   border: 1px solid #eee;
-  transition: 0.4s;
-  flex-shrink: 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: 0.35s;
+}
+
+.uni-slider-icon {
+  color: #1a237e;
 }
 
 .uni-slider-card:hover {
   transform: translateY(-8px);
   border-color: #1a237e;
-  box-shadow: 0 15px 35px rgba(26, 35, 126, 0.15);
+  box-shadow: 0 15px 40px rgba(26, 35, 126, 0.18);
 }
 
-/* --- 2. ADMISSIONS GRID --- */
+/* ---------------- ADMISSIONS GRID ---------------- */
+
 .admissions-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  width: 100%;
+  gap: 25px;
 }
 
 .uni-grid-card {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 18px;
+
+  padding: 22px;
+  border-radius: 14px;
+
   background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  border: 1px solid #f0f0f0;
+
+  border: 1px solid #eee;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+
   transition: 0.3s;
 }
 
-/* --- 3. LIFE AT COLLEGE --- */
+.uni-grid-icon-box {
+  background: #f0f3ff;
+  color: #1a237e;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.uni-grid-card:hover {
+  transform: translateY(-5px);
+  border-color: #1a237e;
+  box-shadow: 0 12px 30px rgba(26, 35, 126, 0.15);
+}
+
+/* ---------------- LIFE AT COLLEGE ---------------- */
+
 .life-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
+  gap: 25px;
 }
 
 .home-life-card {
   background: #fff;
   padding: 30px 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  border: 1px solid #eee;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: 0.3s ease;
   text-align: center;
+
+  transition: all 0.3s ease;
 }
 
-/* --- Responsive Media Queries (The Fix) --- */
+.home-life-card:hover {
+  border-color: #1a237e;
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+/* ---------------- HOME GALLERY ---------------- */
 
-/* LAPTOP VIEW: Hamburger ko hide aur links ko show karne ke liye */
-@media (min-width: 1025px) {
-  .hamburger-icon {
-    display: none !important;
-  }
-  .nav-links-wrapper {
-    display: flex !important;
-    position: static;
-    background: none;
-    box-shadow: none;
-    padding: 0;
-    width: auto;
-  }
+.home-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
 }
 
-/* TABLET & MOBILE VIEW */
-@media (max-width: 1024px) {
-  .hamburger-icon {
-    display: block; /* Show hamburger only on small screens */
-  }
-
-  .nav-links-wrapper {
-    display: none; /* Hide links by default */
-    position: absolute;
-    top: 80px;
-    left: 0;
-    width: 100%;
-    background: white;
-    flex-direction: column;
-    padding: 30px 5%;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    gap: 20px;
-    align-items: flex-start;
-  }
-
-  /* Jab menu open ho (React state se) */
-  .nav-links-wrapper.open {
-    display: flex;
-  }
-
-  .hero-title { font-size: 32px !important; }
-  .admissions-grid, .life-grid {
-    grid-template-columns: 1fr;
-    padding: 0 10px;
-  }
+.home-gallery-card {
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.3s;
 }
 
-@media (max-width: 480px) {
-  .brand-name { font-size: 14px; }
-  .hero-btn { width: 100%; padding: 12px 20px; }
+.home-gallery-card:hover {
+  transform: translateY(-4px);
 }
-/* App.css additions for Home Gallery */
+
 .gallery-dark-strip {
   position: absolute;
   bottom: 0;
-  left: 0;
   width: 100%;
-  background: #0d1137; /* Navy Blue overlay */
+  background: #0d1137;
   color: white;
-  padding: 12px 10px;
-  text-align: center;
-  font-weight: bold;
+  padding: 12px;
   font-size: 13px;
   text-transform: uppercase;
+  font-weight: 600;
 }
 
 .gallery-view-btn {
-  background-color: #0d1137;
+  background: #0d1137;
   color: white;
-  padding: 12px 30px;
+
   border: none;
+
+  padding: 12px 28px;
+
   font-weight: 600;
-  font-size: 14px;
+
+  border-radius: 5px;
+
   cursor: pointer;
+
   transition: 0.3s;
 }
 
 .gallery-view-btn:hover {
-  background-color: #1a237e;
+  background: #1a237e;
   transform: translateY(-2px);
+}
+
+/* ---------------- EVENTS ---------------- */
+
+.home-event-card {
+  min-width: 280px;
+
+  padding: 25px;
+
+  border-radius: 16px;
+
+  background: white;
+
+  border: 1px solid #eee;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+
+  transition: 0.3s;
+}
+
+.home-event-card:hover {
+  transform: translateY(-5px);
+  border-color: #1a237e;
+}
+
+/* ---------------- FOOTER ---------------- */
+
+footer {
+  background: #0d1137;
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+/* Tablet */
+
+@media (max-width: 1024px) {
+
+  .hamburger-icon {
+    display: block;
+  }
+
+  .nav-links-wrapper {
+    display: none;
+
+    position: absolute;
+    top: 80px;
+    left: 0;
+
+    width: 100%;
+
+    background: white;
+
+    flex-direction: column;
+
+    padding: 30px 5%;
+
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+
+    gap: 20px;
+
+    align-items: flex-start;
+  }
+
+  .nav-links-wrapper.open {
+    display: flex;
+  }
+
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+  .hero-title {
+    font-size: 34px !important;
+  }
+
+  .section-container {
+    padding: 60px 6%;
+  }
+
+}
+
+/* Small phones */
+
+@media (max-width: 480px) {
+
+  .brand-name {
+    font-size: 14px;
+  }
+
+  .hero-btn {
+    width: 100%;
+  }
+
 }

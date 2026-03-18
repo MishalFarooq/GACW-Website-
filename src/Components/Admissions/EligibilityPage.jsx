@@ -1,5 +1,5 @@
 import React from "react";
-// Folder 'Breadcrumbs' aur file 'Breadcrumbs.jsx' ke mutabiq import
+import { GraduationCap, BookOpen } from "lucide-react";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const EligibilityCriteria = () => {
@@ -18,8 +18,7 @@ const EligibilityCriteria = () => {
   ];
 
   return (
-    <div style={pageWrapper}>
-      {/* Dynamic links array pass kiya hai navigation ke liye */}
+    <div style={wrapper}>
       <Breadcrumbs
         links={[
           { name: "Admissions", path: "/admissions" },
@@ -27,144 +26,148 @@ const EligibilityCriteria = () => {
         ]}
       />
 
-      <div style={contentArea}>
-        <div style={headerTextWrapper}>
-          <p style={subLabel}>ADMISSION ELIGIBILITY</p>
-          <h1 style={headingStyle}>Eligibility Criteria</h1>
-        </div>
+      {/* HEADER */}
+      <section style={hero}>
+        <h1 style={heroTitle}>Eligibility Criteria</h1>
+        <div style={divider}></div>
+        <p style={heroText}>
+          Admission requirements for Intermediate and Associate Degree Programs.
+        </p>
+      </section>
 
-        {/* --- Intermediate Section --- */}
-        <div style={simpleSection}>
-          <h2 style={simpleSubHeading}>Intermediate Program</h2>
-          <p style={mainText}>
-            The student who have{" "}
-            <span style={highlight}>
-              cleared the matriculation examination without having supply
-            </span>{" "}
-            in any of the subject is eligible to take admission in the college.
+      <div style={container}>
+        {/* INTERMEDIATE */}
+        <div style={section}>
+          <h2 style={sectionTitle}>
+            <GraduationCap size={22} /> Intermediate Program
+          </h2>
+
+          <p style={text}>
+            Students who have <strong>passed the Matriculation Examination</strong>{" "}
+            without any supply in any subject are eligible to apply for
+            admission to the Intermediate programs offered by the college.
           </p>
         </div>
 
-        <hr style={divider} />
+        {/* ADP */}
+        <div style={section}>
+          <h2 style={sectionTitle}>
+            <BookOpen size={22} /> Associate Degree Program (ADP)
+          </h2>
 
-        {/* --- ADP Program Section --- */}
-        <div style={simpleSection}>
-          <h2 style={simpleSubHeading}>Associate Degree Program (ADP)</h2>
-          <p style={infoNote}>
-            Admission to ADP classes is made according to the schedule
-            advertised in leading newspapers. Every department has its own
-            specific eligibility criteria:
+          <p style={infoText}>
+            Admissions to ADP classes are conducted according to the schedule
+            announced in national newspapers and official college notices.
+            Each department may have its own subject requirements.
           </p>
 
-          <div style={simpleListGrid}>
+          <div style={grid}>
             {departments.map((dept, index) => (
-              <div key={index} style={simpleListItem}>
-                <span style={bullet}>•</span>
-                <span style={deptNameText}>Department of {dept}</span>
+              <div key={index} style={deptCard}>
+                Department of {dept}
               </div>
             ))}
           </div>
         </div>
 
-        <div style={simpleFooterNote}>
-          <strong>Note:</strong> Final eligibility is subject to the marks
-          obtained in relevant subjects as per the Punjab Government Merit
-          Policy.
+        {/* NOTE */}
+        <div style={noteBox}>
+          <strong>Note:</strong> Final eligibility depends on the marks obtained
+          in relevant subjects according to the Punjab Government merit policy.
         </div>
       </div>
     </div>
   );
 };
 
-// --- STYLES (Full Width) ---
-const pageWrapper = {
+/* ---------- STYLES ---------- */
+
+const wrapper = {
   width: "100%",
-  backgroundColor: "#fff",
-  margin: 0,
+  minHeight: "100vh",
+  background: "#fff",
 };
 
-const contentArea = {
-  padding: "40px 20px",
-  width: "100%",
-  maxWidth: "1200px",
+const hero = {
+  background: "#1a237e",
+  color: "white",
+  textAlign: "center",
+  padding: "70px 20px",
+};
+
+const heroTitle = {
+  fontSize: "38px",
+  fontWeight: "800",
+};
+
+const heroText = {
+  marginTop: "10px",
+  opacity: "0.9",
+};
+
+const divider = {
+  width: "60px",
+  height: "4px",
+  background: "white",
+  margin: "18px auto",
+};
+
+const container = {
+  maxWidth: "1100px",
   margin: "0 auto",
+  padding: "60px 20px",
 };
 
-const headerTextWrapper = {
-  marginBottom: "30px",
-};
-
-const subLabel = { fontSize: "12px", color: "#1a237e", fontWeight: "700" };
-
-const headingStyle = {
-  fontSize: "32px",
-  color: "#333",
-  fontWeight: "600",
-  marginTop: "5px",
-};
-
-const simpleSection = {
+const section = {
   marginBottom: "40px",
-  width: "100%",
+  padding: "25px",
+  border: "1px solid #eee",
+  borderRadius: "8px",
 };
 
-const simpleSubHeading = {
-  fontSize: "22px",
+const sectionTitle = {
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
   color: "#1a237e",
   marginBottom: "15px",
-  fontWeight: "600",
 };
 
-const mainText = {
+const text = {
   fontSize: "16px",
   color: "#444",
-  lineHeight: "1.6",
-  margin: 0,
+  lineHeight: "1.7",
 };
 
-const highlight = {
-  fontWeight: "600",
-  color: "#000",
-};
-
-const infoNote = {
+const infoText = {
   fontSize: "15px",
   color: "#666",
   marginBottom: "20px",
 };
 
-const simpleListGrid = {
+const grid = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-  gap: "10px",
+  gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+  gap: "12px",
 };
 
-const simpleListItem = {
-  display: "flex",
-  alignItems: "center",
-  padding: "8px 0",
-};
-
-const bullet = {
-  color: "#1a237e",
-  marginRight: "10px",
-  fontSize: "20px",
-};
-
-const deptNameText = { fontSize: "15px", color: "#444" };
-
-const divider = {
-  border: 0,
-  borderTop: "1px solid #eee",
-  margin: "30px 0",
-};
-
-const simpleFooterNote = {
-  marginTop: "20px",
-  padding: "15px 0",
-  borderTop: "2px solid #1a237e",
-  color: "#555",
+const deptCard = {
+  padding: "14px",
+  border: "1px solid #eee",
+  borderLeft: "4px solid #1a237e",
+  borderRadius: "6px",
+  background: "#f8f9ff",
   fontSize: "14px",
+};
+
+const noteBox = {
+  marginTop: "30px",
+  padding: "20px",
+  background: "#f0f2ff",
+  borderLeft: "5px solid #1a237e",
+  borderRadius: "6px",
+  fontSize: "14px",
+  color: "#444",
 };
 
 export default EligibilityCriteria;

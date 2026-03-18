@@ -1,313 +1,216 @@
 import React, { useState } from "react";
-// Breadcrumbs import add kiya
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const FacultyPage = () => {
   const [selectedDept, setSelectedDept] = useState(null);
 
-  // Departments List
+  /* Departments from image */
   const departments = [
-    "English",
-    "Maths",
-    "Persian",
-    "Islamiat",
-    "Education",
-    "H-Eco",
-    "H&P Edu",
-    "Physics",
-    "Computer Science",
-    "Punjabi",
-    "Urdu",
-    "History",
-    "Economics",
-    "Statistics",
     "Psychology",
-    "Library Science",
-    "Chemistry",
+    "History",
+    "Education",
+    "Islamiat",
     "Zoology",
-    "Fine Arts",
-    "Journalism",
+    "Economics",
+    "Computer Science"
   ];
 
-  // All 26 Teachers Data
   const allTeachers = [
-    {
-      name: "Mrs. Farina Waqar",
-      dept: "English",
-      desig: "Associate Professor",
-      qual: "M.A",
-    },
-    {
-      name: "Mrs. Saira Akhtar",
-      dept: "Maths",
-      desig: "Associate Professor",
-      qual: "M.Sc",
-    },
-    {
-      name: "Ms. Nosheen",
-      dept: "Persian",
-      desig: "Associate Professor",
-      qual: "M.Phil",
-    },
-    {
-      name: "Mrs. Rehana Anjum",
-      dept: "Islamiat",
-      desig: "Associate Professor",
-      qual: "M.Phil",
-    },
-    {
-      name: "Ms. Shahida Ashiq",
-      dept: "Education",
-      desig: "Associate Professor",
-      qual: "M.A",
-    },
-    {
-      name: "Mrs. Munazzah Ihtisham",
-      dept: "H-Eco",
-      desig: "Associate Professor",
-      qual: "M.Sc",
-    },
-    {
-      name: "Mrs. Fouzia Jamshaid",
-      dept: "H&P Edu",
-      desig: "Associate Professor",
-      qual: "M.A",
-    },
-    {
-      name: "Mrs. Ayesha Abdul Khaliq",
-      dept: "Islamiat",
-      desig: "Associate Professor",
-      qual: "M.Phil",
-    },
-    {
-      name: "Mrs. Sumeera Shaheen",
-      dept: "Physics",
-      desig: "Associate Professor",
-      qual: "M.Sc",
-    },
-    {
-      name: "Mrs. Ansa Zenib",
-      dept: "Computer Science",
-      desig: "Assistant Professor",
-      qual: "MS",
-    },
-    {
-      name: "Mrs. Nadira Noori",
-      dept: "Punjabi",
-      desig: "Assistant Professor",
-      qual: "M.A",
-    },
-    {
-      name: "Mrs. Tahira Rauf",
-      dept: "Urdu",
-      desig: "Assistant Professor",
-      qual: "M.A",
-    },
-    {
-      name: "Mrs. Attika Azhar",
-      dept: "English",
-      desig: "Assistant Professor",
-      qual: "M.A",
-    },
-    {
-      name: "Mrs. Noumana Yaseen Chughtai",
-      dept: "English",
-      desig: "Assistant Professor",
-      qual: "M.A",
-    },
-    {
-      name: "Mrs. Masooma Kanwal Rizvi",
-      dept: "History",
-      desig: "Assistant Professor",
-      qual: "M.Phil",
-    },
-    {
-      name: "Rubina Gulnaz",
-      dept: "Economics",
-      desig: "Assistant Professor",
-      qual: "M.Phil",
-    },
-    {
-      name: "Mrs. Gulnaz Rafique",
-      dept: "Statistics",
-      desig: "Assistant Professor",
-      qual: "M.Phil",
-    },
-    {
-      name: "Mrs. Darakshan Jabeen",
-      dept: "Psychology",
-      desig: "Assistant Professor",
-      qual: "M.Sc",
-    },
-    {
-      name: "Mrs. Gul e Zahra",
-      dept: "Library Science",
-      desig: "Senior Librarian",
-      qual: "MS",
-    },
-    {
-      name: "Mrs. Saba Siddique",
-      dept: "Psychology",
-      desig: "Assistant Professor",
-      qual: "M.Sc",
-    },
-    {
-      name: "Mrs. Faiza Azhar",
-      dept: "Chemistry",
-      desig: "Assistant Professor",
-      qual: "M.Phil",
-    },
-    {
-      name: "Mrs. Sana Ijaz",
-      dept: "Maths",
-      desig: "Assistant Professor",
-      qual: "M.Phil",
-    },
-    {
-      name: "Mrs. Maria Masood",
-      dept: "Zoology",
-      desig: "Assistant Professor",
-      qual: "M.Phil",
-    },
-    {
-      name: "Mrs. Saman Javed",
-      dept: "Fine Arts",
-      desig: "Assistant Professor",
-      qual: "M.A",
-    },
-    {
-      name: "Ms. Munazza Ashraf",
-      dept: "Zoology",
-      desig: "Lecturer",
-      qual: "M.Phil",
-    },
-    {
-      name: "Ms. Fizza Saleem",
-      dept: "Journalism",
-      desig: "Lecturer",
-      qual: "M.Phil",
-    },
+    { name:"Mrs. Darakshan Jabeen", dept:"Psychology", desig:"Assistant Professor", qual:"M.Sc" },
+    { name:"Mrs. Saba Siddique", dept:"Psychology", desig:"Assistant Professor", qual:"M.Phil" },
+
+    { name:"Mrs. Masooma Kanwal Rizvi", dept:"History", desig:"Assistant Professor", qual:"M.Phil" },
+
+    { name:"Ms. Shahida Ashiq", dept:"Education", desig:"Assistant Professor", qual:"M.A" },
+
+    { name:"Mrs. Ayesha Abdul Khaliq", dept:"Islamiat", desig:"Associate Professor", qual:"M.Phil" },
+
+    { name:"Mrs. Maria Masood", dept:"Zoology", desig:"Assistant Professor", qual:"M.Phil" },
+    { name:"Ms. Munazza Ashraf", dept:"Zoology", desig:"Lecturer", qual:"M.Phil" },
+
+    { name:"Rubina Gulnaz", dept:"Economics", desig:"Assistant Professor", qual:"M.Phil" },
+
+    { name:"Mrs. Ansa Zenib", dept:"Computer Science", desig:"Assistant Professor", qual:"MS" }
   ];
 
-  const filteredTeachers = allTeachers.filter((t) => t.dept === selectedDept);
-
-  // Common Breadcrumbs Logic
-  const facultyBreadcrumbs = (
-    <Breadcrumbs
-      links={[{ name: "Academics", path: "/academics" }, { name: "Faculty" }]}
-    />
+  const filteredTeachers = allTeachers.filter(
+    t => t.dept === selectedDept
   );
 
   return (
-    <div style={pageWrapper}>
-      {facultyBreadcrumbs}
+    <div style={wrapper}>
 
-      <div style={contentArea}>
+      <Breadcrumbs
+        links={[
+          { name: "Academics", path: "/academics" },
+          { name: "Faculty" }
+        ]}
+      />
+
+      {/* HEADER */}
+      <section style={hero}>
+        <h1 style={heroTitle}>Faculty & Departments</h1>
+        <div style={divider}></div>
+      </section>
+
+      <div style={container}>
+
         {!selectedDept ? (
           <>
-            <h2 style={headingStyle}>DEPARTMENTS</h2>
-            <ul style={{ listStyle: "none", padding: 0 }}>
-              {departments.map((dept) => (
-                <li
+            <h2 style={sectionTitle}>Departments</h2>
+
+            <div style={deptGrid}>
+              {departments.map(dept => (
+                <div
                   key={dept}
+                  style={deptCard}
                   onClick={() => setSelectedDept(dept)}
-                  style={deptListItemStyle}
                 >
-                  › Department of {dept}
-                </li>
+                  Department of {dept}
+                </div>
               ))}
-            </ul>
+            </div>
           </>
         ) : (
           <>
-            <button onClick={() => setSelectedDept(null)} style={backBtnStyle}>
+            <button
+              style={backBtn}
+              onClick={() => setSelectedDept(null)}
+            >
               ← Back to Departments
             </button>
-            <h2 style={deptHeadingStyle}>Department of {selectedDept}</h2>
 
-            {filteredTeachers.map((teacher, index) => (
-              <div key={index} style={teacherCardStyle}>
-                <h3 style={teacherNameStyle}>{teacher.name}</h3>
-                <div style={teacherInfoGrid}>
-                  <strong>Higher Qualification:</strong>{" "}
-                  <span>{teacher.qual}</span>
-                  <strong>Designation:</strong> <span>{teacher.desig}</span>
-                  <strong>Department:</strong> <span>{teacher.dept}</span>
+            <h2 style={sectionTitle}>
+              Department of {selectedDept}
+            </h2>
+
+            <div style={teacherGrid}>
+
+              {filteredTeachers.map((teacher,index)=>(
+                <div key={index} style={teacherCard}>
+
+                  <h3 style={teacherName}>
+                    {teacher.name}
+                  </h3>
+
+                  <div style={teacherInfo}>
+                    <div>
+                      <strong>Qualification:</strong> {teacher.qual}
+                    </div>
+
+                    <div>
+                      <strong>Designation:</strong> {teacher.desig}
+                    </div>
+
+                    <div>
+                      <strong>Department:</strong> {teacher.dept}
+                    </div>
+                  </div>
+
                 </div>
-              </div>
-            ))}
+              ))}
 
-            {filteredTeachers.length === 0 && (
-              <p style={{ color: "#666" }}>Information will be updated soon.</p>
-            )}
+              {filteredTeachers.length === 0 && (
+                <p style={{color:"#666"}}>
+                  Information will be updated soon.
+                </p>
+              )}
+
+            </div>
           </>
         )}
+
       </div>
     </div>
   );
 };
 
-// --- Standard Styles (Matching Admissions/About Consistency) ---
-const pageWrapper = {
+/* STYLES */
+
+const wrapper = {
   width: "100%",
-  minHeight: "80vh",
-  backgroundColor: "#fff",
-};
-const contentArea = { padding: "40px 20px", width: "100%" };
-const headingStyle = {
-  borderBottom: "2px solid #1a237e",
-  color: "#1a237e",
-  paddingBottom: "10px",
-  marginBottom: "30px",
-  fontSize: "28px",
+  background: "#fff",
+  minHeight: "100vh"
 };
 
-const deptListItemStyle = {
-  padding: "15px",
-  borderBottom: "1px solid #eee",
-  cursor: "pointer",
-  color: "#1a237e",
-  fontSize: "18px",
-  fontWeight: "500",
-  transition: "0.2s",
-};
-
-const backBtnStyle = {
-  marginBottom: "20px",
-  cursor: "pointer",
-  padding: "10px 20px",
+const hero = {
   background: "#1a237e",
-  color: "#fff",
-  border: "none",
-  borderRadius: "5px",
+  color: "white",
+  textAlign: "center",
+  padding: "60px 20px"
 };
 
-const deptHeadingStyle = {
-  marginBottom: "30px",
-  textTransform: "uppercase",
-  borderLeft: "5px solid #1a237e",
-  paddingLeft: "15px",
+const heroTitle = {
+  fontSize: "36px",
+  fontWeight: "800"
+};
+
+const divider = {
+  width: "60px",
+  height: "4px",
+  background: "white",
+  margin: "18px auto"
+};
+
+const container = {
+  maxWidth: "1100px",
+  margin: "0 auto",
+  padding: "60px 20px"
+};
+
+const sectionTitle = {
   color: "#1a237e",
-};
-
-const teacherCardStyle = {
   marginBottom: "30px",
-  padding: "20px",
-  border: "1px solid #eee",
-  borderRadius: "8px",
-  boxShadow: "0 2px 5px rgba(0,0,0,0.05)",
+  fontSize: "26px"
 };
 
-const teacherNameStyle = {
-  color: "#d32f2f",
-  margin: "0 0 15px 0",
-  fontSize: "22px",
-};
-const teacherInfoGrid = {
+const deptGrid = {
   display: "grid",
-  gridTemplateColumns: "160px 1fr",
-  gap: "5px",
-  fontSize: "16px",
+  gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
+  gap: "20px"
+};
+
+const deptCard = {
+  padding: "20px",
+  background: "#f8faff",
+  borderLeft: "4px solid #1a237e",
+  borderRadius: "8px",
+  cursor: "pointer",
+  fontWeight: "500",
+  transition:"0.3s"
+};
+
+const teacherGrid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
+  gap: "20px"
+};
+
+const teacherCard = {
+  padding: "22px",
+  border: "1px solid #eee",
+  borderRadius: "10px",
+  boxShadow: "0 5px 15px rgba(0,0,0,0.05)"
+};
+
+const teacherName = {
+  color: "#1a237e",
+  marginBottom: "12px"
+};
+
+const teacherInfo = {
+  lineHeight: "1.8",
+  color: "#444"
+};
+
+const backBtn = {
+  marginBottom: "25px",
+  padding: "10px 18px",
+  border: "none",
+  background: "#1a237e",
+  color: "white",
+  borderRadius: "6px",
+  cursor: "pointer"
 };
 
 export default FacultyPage;

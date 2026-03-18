@@ -1,13 +1,11 @@
 import React from "react";
-// Breadcrumbs import add kiya
+import { FileText, Download } from "lucide-react";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
-// Path check kar lein: agar file 'src/assets/timetable.pdf' hai
 import timetableFile from "../../assets/timetable.pdf";
 
 const TimetablePage = () => {
   return (
-    <div style={pageWrapper}>
-      {/* Breadcrumbs: Home / Academics / Timetable */}
+    <div style={wrapper}>
       <Breadcrumbs
         links={[
           { name: "Academics", path: "/academics" },
@@ -15,83 +13,147 @@ const TimetablePage = () => {
         ]}
       />
 
-      <div style={contentArea}>
-        {/* Heading bilkul Govt College ki website jaisa */}
-        <h1 style={headingStyle}>Timetable</h1>
+      {/* Header */}
+      <section style={hero}>
+        <h1 style={heroTitle}>College Timetable</h1>
+        <div style={divider}></div>
+        <p style={heroText}>
+          Government Associate College for Women, Chung — Academic Year 2025-26
+        </p>
+      </section>
 
-        <ul style={listStyle}>
-          <li style={listItemStyle}>
-            {/* Blue Bullet Point */}
-            <span style={bulletStyle}>•</span>
+      {/* Content */}
+      <div style={container}>
+        <div style={card}>
+          <div style={iconBox}>
+            <FileText size={36} color="#1a237e" />
+          </div>
 
-            {/* Download attribute for saving, target blank for viewing */}
+          <div style={fileInfo}>
+            <h3 style={fileTitle}>College Timetable 2025-26</h3>
+            <p style={fileDesc}>
+              Download the official timetable in PDF format.
+            </p>
+          </div>
+
+          <div style={actions}>
+            <a
+              href={timetableFile}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={viewBtn}
+            >
+              View PDF
+            </a>
+
             <a
               href={timetableFile}
               download="GACW_CHUNG_Timetable.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={linkStyle}
-              onMouseOver={(e) => (e.target.style.textDecoration = "underline")}
-              onMouseOut={(e) => (e.target.style.textDecoration = "none")}
+              style={downloadBtn}
             >
-              College Timetable 2025-26
+              <Download size={16} />
+              Download
             </a>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-// --- STYLES (Matching Consistency) ---
+/* ---------- STYLES ---------- */
 
-const pageWrapper = {
+const wrapper = {
   width: "100%",
-  minHeight: "80vh",
-  backgroundColor: "#ffffff",
-  fontFamily: "Arial, sans-serif",
+  minHeight: "100vh",
+  background: "#fff",
 };
 
-const contentArea = {
-  padding: "40px 20px", // Side spacing standard 20px kar di
-  width: "100%",
+const hero = {
+  background: "#1a237e",
+  color: "white",
+  textAlign: "center",
+  padding: "70px 20px",
 };
 
-const headingStyle = {
-  fontSize: "28px",
-  color: "#333",
-  fontWeight: "500",
-  marginBottom: "30px",
-  borderBottom: "1px solid #eeeeee", // Thin line niche
-  paddingBottom: "15px",
-  width: "100%",
+const heroTitle = {
+  fontSize: "38px",
+  fontWeight: "800",
 };
 
-const listStyle = {
-  listStyleType: "none",
-  padding: 0,
-  margin: 0,
+const heroText = {
+  marginTop: "10px",
+  opacity: "0.9",
 };
 
-const listItemStyle = {
+const divider = {
+  width: "60px",
+  height: "4px",
+  background: "white",
+  margin: "18px auto",
+};
+
+const container = {
+  maxWidth: "900px",
+  margin: "0 auto",
+  padding: "60px 20px",
+};
+
+const card = {
   display: "flex",
   alignItems: "center",
-  marginBottom: "15px",
+  gap: "20px",
+  padding: "30px",
+  border: "1px solid #eee",
+  borderRadius: "12px",
+  boxShadow: "0 6px 20px rgba(0,0,0,0.06)",
+  flexWrap: "wrap",
 };
 
-const bulletStyle = {
-  marginRight: "10px",
-  fontSize: "24px",
-  color: "#1a237e", // Dark Blue Bullet
-  lineHeight: "1",
+const iconBox = {
+  background: "#f8faff",
+  padding: "18px",
+  borderRadius: "10px",
 };
 
-const linkStyle = {
-  fontSize: "18px",
-  color: "#1a237e", // Blue Link
+const fileInfo = {
+  flex: "1",
+};
+
+const fileTitle = {
+  color: "#1a237e",
+  marginBottom: "5px",
+};
+
+const fileDesc = {
+  color: "#666",
+  fontSize: "15px",
+};
+
+const actions = {
+  display: "flex",
+  gap: "10px",
+};
+
+const viewBtn = {
+  padding: "10px 18px",
+  background: "#f1f1f1",
+  color: "#333",
   textDecoration: "none",
-  cursor: "pointer",
-  fontWeight: "500",
+  borderRadius: "6px",
+  fontSize: "14px",
+};
+
+const downloadBtn = {
+  display: "flex",
+  alignItems: "center",
+  gap: "6px",
+  padding: "10px 18px",
+  background: "#1a237e",
+  color: "white",
+  textDecoration: "none",
+  borderRadius: "6px",
+  fontSize: "14px",
 };
 
 export default TimetablePage;

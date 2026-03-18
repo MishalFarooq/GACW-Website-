@@ -1,0 +1,188 @@
+/* NAVBAR */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 40px;
+background:#ffffff;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
+position:sticky;
+top:0;
+z-index:999;
+}
+
+/* LOGO */
+
+.logo-section{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo{
+height:55px;
+width:55px;
+object-fit:contain;
+}
+
+.brand{
+display:flex;
+flex-direction:column;
+}
+
+.brand-title{
+font-weight:700;
+font-size:18px;
+letter-spacing:0.5px;
+}
+
+.brand-sub{
+font-size:11px;
+color:#555;
+}
+
+/* NAV LINKS */
+
+.nav-links{
+display:flex;
+align-items:center;
+gap:28px;
+}
+
+.nav-links a{
+text-decoration:none;
+font-size:13px;
+font-weight:600;
+color:#333;
+letter-spacing:0.3px;
+}
+
+/* DROPDOWN */
+
+.dropdown{
+position:relative;
+cursor:pointer;
+}
+
+.dropdown-title{
+display:flex;
+align-items:center;
+gap:5px;
+font-size:13px;
+font-weight:600;
+}
+
+/* DROPDOWN MENU */
+
+.dropdown-menu{
+position:absolute;
+top:38px;
+left:0;
+background:#ffffff;
+box-shadow:0 8px 18px rgba(0,0,0,0.12);
+border:1px solid #e5e5e5;
+border-radius:3px;
+min-width:230px;
+display:flex;
+flex-direction:column;
+padding:6px 0;
+z-index:1000;
+}
+
+/* DROPDOWN ITEMS */
+
+.dropdown-menu a{
+display:block;
+padding:12px 20px;
+font-size:12px;
+font-weight:600;
+text-transform:uppercase;
+text-decoration:none;
+color:#333;
+border-bottom:1px solid #f1f1f1;
+transition:all 0.2s ease;
+}
+
+.dropdown-menu a:last-child{
+border-bottom:none;
+}
+
+.dropdown-menu a:hover{
+background:#f6f6f6;
+padding-left:24px;
+}
+
+/* CONTACT BUTTON */
+
+.contact-btn{
+background:none;
+border:none;
+cursor:pointer;
+font-size:13px;
+font-weight:600;
+color:#333;
+}
+
+/* HAMBURGER */
+
+.hamburger{
+display:none;
+cursor:pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.navbar{
+padding:12px 20px;
+}
+
+.hamburger{
+display:block;
+}
+
+.nav-links{
+position:absolute;
+top:80px;
+left:0;
+width:100%;
+background:#ffffff;
+flex-direction:column;
+align-items:flex-start;
+padding:20px;
+gap:18px;
+display:none;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.nav-links.active{
+display:flex;
+}
+
+/* MOBILE DROPDOWN */
+
+.dropdown{
+width:100%;
+}
+
+.dropdown-title{
+width:100%;
+justify-content:space-between;
+}
+
+.dropdown-menu{
+position:static;
+box-shadow:none;
+border:none;
+width:100%;
+padding-left:10px;
+}
+
+.dropdown-menu a{
+padding:10px 0;
+border:none;
+}
+
+}

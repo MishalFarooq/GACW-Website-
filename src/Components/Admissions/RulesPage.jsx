@@ -1,239 +1,283 @@
 import React from "react";
-// Sahi path: Folder se bahar nikal kar (..) Breadcrumbs folder mein jana hai
+import { ShieldAlert, ClipboardList, UserCheck, AlertTriangle } from "lucide-react";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const RulesPage = () => {
   return (
-    <div style={pageWrapper}>
-      {/* Breadcrumbs component ko sahi data pass kiya */}
+    <div style={wrapper}>
       <Breadcrumbs
         links={[
           { name: "Admissions", path: "/admissions" },
-          { name: "Rules and Regulations" },
+          { name: "Rules & Regulations" },
         ]}
       />
 
-      <div style={contentArea}>
-        <div style={headerTextWrapper}>
-          <p style={subLabel}>COLLEGE POLICIES</p>
-          <h1 style={headingStyle}>Rules and Regulations</h1>
-        </div>
+      {/* HEADER */}
+      <section style={hero}>
+        <h1 style={heroTitle}>Rules & Regulations</h1>
+        <div style={divider}></div>
+        <p style={heroText}>
+          Students must follow college discipline and regulations to maintain
+          academic excellence and a safe learning environment.
+        </p>
+      </section>
 
-        {/* 1. Attendance Section */}
-        <div style={sectionBox}>
-          <h2 style={subHeadingStyle}>Attendance</h2>
-          <ul style={listStyle}>
-            <li style={listItemStyle}>
-              <span style={bulletStyle}>•</span> Attendance must be at least{" "}
-              <strong>75%</strong> for promotion and Board examination.
-            </li>
-            <li style={listItemStyle}>
-              <span style={bulletStyle}>•</span> Maximum of 5 days leave is
-              allowed per month.
-            </li>
-            <li style={listItemStyle}>
-              <span style={bulletStyle}>•</span> If absent for 10 days
-              continuously, the name will be struck off. Re-admission is subject
-              to rules.
+      <div style={container}>
+        {/* Attendance */}
+        <div style={section}>
+          <h2 style={sectionTitle}>
+            <ClipboardList size={22} /> Attendance
+          </h2>
+
+          <ul style={list}>
+            <li>Minimum <strong>75% attendance</strong> required for exams.</li>
+            <li>Maximum of <strong>5 days leave</strong> allowed per month.</li>
+            <li>
+              Absence for <strong>10 consecutive days</strong> may lead to name
+              removal from college rolls.
             </li>
           </ul>
         </div>
 
-        {/* 2. Discipline & Fines Section */}
-        <div style={sectionBox}>
-          <h2 style={subHeadingStyle}>Discipline & Fines</h2>
+        {/* Discipline */}
+        <div style={section}>
+          <h2 style={sectionTitle}>
+            <ShieldAlert size={22} /> Discipline & Fines
+          </h2>
+
           <div style={tableWrapper}>
-            <table style={fineTable}>
+            <table style={table}>
               <thead>
-                <tr style={tableHeader}>
-                  <th style={thStyle}>Category / Discipline Breach</th>
-                  <th style={thStyle}>Fine Amount</th>
+                <tr style={tableHead}>
+                  <th style={th}>Violation</th>
+                  <th style={th}>Fine</th>
                 </tr>
               </thead>
+
               <tbody>
                 <tr>
-                  <td style={tdStyle}>Incomplete uniform</td>
-                  <td style={tdStyle}>Rs. 100</td>
+                  <td style={td}>Incomplete Uniform</td>
+                  <td style={td}>Rs.100</td>
                 </tr>
                 <tr>
-                  <td style={tdStyle}>Without uniform</td>
-                  <td style={tdStyle}>Rs. 150</td>
+                  <td style={td}>Without Uniform</td>
+                  <td style={td}>Rs.150</td>
                 </tr>
                 <tr>
-                  <td style={tdStyle}>Breach of discipline</td>
-                  <td style={tdStyle}>Rs. 200 - Rs. 1000</td>
+                  <td style={td}>Discipline Breach</td>
+                  <td style={td}>Rs.200 - Rs.1000</td>
                 </tr>
                 <tr>
-                  <td style={tdStyle}>Mobile / Camera / Tape Recorder</td>
-                  <td style={tdStyle}>Rs. 1000 + Confiscation</td>
+                  <td style={td}>Mobile / Camera / Tape Recorder</td>
+                  <td style={td}>Rs.1000 + Confiscation</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p style={noteText}>
-            Note: Confiscated items will only be returned on a written request
-            from parents.
+
+          <p style={note}>
+            Confiscated items will only be returned after a written request from
+            parents.
           </p>
         </div>
 
-        {/* 3. Leave Application */}
-        <div style={sectionBox}>
-          <h2 style={subHeadingStyle}>Leave Application</h2>
-          <div style={docGrid}>
-            <div style={docCard}>Up to 5 days: Subject Teacher</div>
-            <div style={docCard}>Up to 15 days: Leave Incharge</div>
-            <div style={docCard}>Longer periods: Vice Principal</div>
-            <div style={docCard}>Illness (6+ days): Medical Certificate</div>
+        {/* Leave */}
+        <div style={section}>
+          <h2 style={sectionTitle}>
+            <UserCheck size={22} /> Leave Application
+          </h2>
+
+          <div style={grid}>
+            <div style={card}>Up to 5 days → Subject Teacher</div>
+            <div style={card}>Up to 15 days → Leave Incharge</div>
+            <div style={card}>Long leave → Vice Principal</div>
+            <div style={card}>Illness (6+ days) → Medical Certificate</div>
           </div>
-          <p style={infoText}>
-            * Infectious disease cases require an immunity certificate before
+
+          <p style={info}>
+            Infectious disease cases require an immunity certificate before
             rejoining.
           </p>
         </div>
 
-        {/* 4. Uniform Details */}
-        <div style={sectionBox}>
-          <h2 style={subHeadingStyle}>Uniform Specifications</h2>
-          <div style={uniformGrid}>
-            <div style={uniformItem}>
-              <strong>Standard:</strong> White wash-n-wear, knee-length shirt,
-              full sleeves, coat collar, and white dupatta.
+        {/* Uniform */}
+        <div style={section}>
+          <h2 style={sectionTitle}>Uniform Specifications</h2>
+
+          <div style={grid}>
+            <div style={card}>
+              White wash-n-wear shirt, knee length, full sleeves, coat collar,
+              white dupatta.
             </div>
-            <div style={uniformItem}>
-              <strong>1st Shift:</strong> 1.5” checked patti inside the
-              border/slits.
+
+            <div style={card}>
+              <strong>1st Shift:</strong> Checked patti inside border/slits.
             </div>
-            <div style={uniformItem}>
-              <strong>2nd Shift:</strong> 1.5” checked patti outside on the
-              slits.
+
+            <div style={card}>
+              <strong>2nd Shift:</strong> Checked patti outside slits.
             </div>
-            <div style={uniformItem}>
-              <strong>Footwear:</strong> Black shoes/joggers with black socks.
-              Open slippers are not allowed.
+
+            <div style={card}>
+              Black shoes/joggers with black socks. Open slippers not allowed.
             </div>
           </div>
-          <div style={warningBox}>
+
+          <div style={warning}>
+            <AlertTriangle size={18} />
             Make-up and jewelry are strictly prohibited. Abayas must be kept in
             the designated room.
           </div>
         </div>
 
-        {/* 5. Identity Card */}
-        <div style={sectionBox}>
-          <h2 style={subHeadingStyle}>College Identity Card</h2>
-          <p style={standardText}>
-            Every student must wear her ID Card during college hours. In case of
-            loss, a duplicate will be issued with a double fee.
+        {/* ID Card */}
+        <div style={section}>
+          <h2 style={sectionTitle}>College Identity Card</h2>
+
+          <p style={text}>
+            Every student must wear her ID card during college hours. In case of
+            loss, a duplicate card will be issued after payment of a double fee.
           </p>
         </div>
 
-        {/* 6. Parent Teacher Meeting */}
-        <div style={lastSection}>
-          <strong>Parent Teacher Meetings:</strong> Held twice a year (after
-          December Tests and Promotion Exams).
+        {/* Parent Meeting */}
+        <div style={meetingBox}>
+          Parent-Teacher meetings are held twice each year after December Tests
+          and Promotion Exams.
         </div>
       </div>
     </div>
   );
 };
 
-// --- STYLES (Provided by you) ---
-const pageWrapper = { width: "100%", backgroundColor: "#fff" };
-const contentArea = { padding: "40px 20px", width: "100%" };
-const headerTextWrapper = {
-  marginBottom: "30px",
-  borderBottom: "1px solid #eee",
-  paddingBottom: "15px",
+/* ---------- STYLES ---------- */
+
+const wrapper = {
+  width: "100%",
+  background: "#fff",
+  minHeight: "100vh",
 };
-const subLabel = { fontSize: "12px", color: "#333", fontWeight: "700" };
-const headingStyle = {
-  fontSize: "36px",
-  color: "#1a237e",
-  fontWeight: "600",
-  marginTop: "5px",
+
+const hero = {
+  background: "#1a237e",
+  color: "white",
+  textAlign: "center",
+  padding: "70px 20px",
 };
-const sectionBox = {
-  marginBottom: "35px",
+
+const heroTitle = {
+  fontSize: "38px",
+  fontWeight: "800",
+};
+
+const heroText = {
+  marginTop: "10px",
+  opacity: "0.9",
+};
+
+const divider = {
+  width: "60px",
+  height: "4px",
+  background: "white",
+  margin: "18px auto",
+};
+
+const container = {
+  maxWidth: "1100px",
+  margin: "0 auto",
+  padding: "60px 20px",
+};
+
+const section = {
+  marginBottom: "40px",
   padding: "25px",
-  border: "1px solid #f0f0f0",
-  borderRadius: "2px",
+  border: "1px solid #eee",
+  borderRadius: "8px",
 };
-const subHeadingStyle = {
-  fontSize: "22px",
+
+const sectionTitle = {
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
   color: "#1a237e",
   marginBottom: "15px",
-  borderBottom: "2px solid #f0f0f0",
-  paddingBottom: "8px",
-  fontWeight: "600",
 };
-const listStyle = { listStyle: "none", padding: 0 };
-const listItemStyle = {
-  display: "flex",
-  alignItems: "flex-start",
-  marginBottom: "10px",
+
+const list = {
+  paddingLeft: "20px",
+  lineHeight: "1.8",
+  color: "#444",
+};
+
+const grid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
+  gap: "12px",
+};
+
+const card = {
+  padding: "15px",
+  background: "#f8f9ff",
+  borderLeft: "4px solid #1a237e",
+  borderRadius: "6px",
+};
+
+const tableWrapper = { overflowX: "auto" };
+
+const table = {
+  width: "100%",
+  borderCollapse: "collapse",
+};
+
+const tableHead = {
+  background: "#f4f6ff",
+};
+
+const th = {
+  padding: "12px",
+  border: "1px solid #eee",
+  color: "#1a237e",
+};
+
+const td = {
+  padding: "12px",
+  border: "1px solid #eee",
+};
+
+const note = {
+  marginTop: "10px",
+  fontSize: "13px",
+  color: "#777",
+};
+
+const info = {
+  marginTop: "10px",
+  fontSize: "13px",
+  color: "#555",
+};
+
+const text = {
   color: "#444",
   lineHeight: "1.6",
 };
-const bulletStyle = {
-  color: "#1a237e",
-  fontWeight: "bold",
-  marginRight: "12px",
-};
-const tableWrapper = { overflowX: "auto", marginTop: "15px" };
-const fineTable = {
-  width: "100%",
-  borderCollapse: "collapse",
-  textAlign: "left",
-};
-const tableHeader = { backgroundColor: "#f8f9fa" };
-const thStyle = { padding: "12px", border: "1px solid #eee", color: "#1a237e" };
-const tdStyle = { padding: "12px", border: "1px solid #eee", color: "#555" };
-const docGrid = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-  gap: "10px",
+
+const warning = {
   marginTop: "15px",
-};
-const docCard = {
-  padding: "15px",
-  backgroundColor: "#f8f9ff",
-  borderLeft: "5px solid #1a237e",
-  fontSize: "14px",
-};
-const uniformGrid = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-  gap: "15px",
-  marginTop: "15px",
-};
-const uniformItem = {
-  padding: "15px",
-  border: "1px solid #eee",
-  fontSize: "14px",
-  color: "#444",
-};
-const warningBox = {
-  marginTop: "15px",
-  padding: "15px",
-  backgroundColor: "#fff5f5",
+  padding: "12px",
+  background: "#fff5f5",
+  borderLeft: "5px solid #e53e3e",
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
   color: "#c53030",
-  borderLeft: "5px solid #c53030",
-  fontSize: "14px",
 };
-const noteText = {
-  fontSize: "13px",
-  color: "#888",
-  marginTop: "10px",
-  fontStyle: "italic",
-};
-const infoText = { fontSize: "13px", color: "#666", marginTop: "10px" };
-const standardText = { color: "#444", lineHeight: "1.6" };
-const lastSection = {
+
+const meetingBox = {
   padding: "20px",
-  backgroundColor: "#e8eaf6",
+  background: "#e8eaf6",
   color: "#1a237e",
   fontWeight: "600",
-  borderRadius: "2px",
+  borderRadius: "6px",
 };
 
 export default RulesPage;

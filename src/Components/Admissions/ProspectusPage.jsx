@@ -1,70 +1,167 @@
 import React from "react";
-import { Link } from "react-router-dom";
-// Sahi path set kiya: folder se bahar nikal kar Breadcrumbs folder mein jana hai
+import { FileText } from "lucide-react";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import prospectusPDF from "../../assets/ProspectustFinal.pdf";
 
 const ProspectusPage = () => {
   return (
-    <div style={pageWrapper}>
-      {/* Sahi array format mein links pass kiye */}
+    <div style={wrapper}>
       <Breadcrumbs
         links={[
           { name: "Admissions", path: "/admissions" },
-          { name: "Forms and Prospectus" },
+          { name: "Forms & Prospectus" },
         ]}
       />
 
-      <div style={contentArea}>
-        <h1 style={headingStyle}>Forms and Prospectus</h1>
+      {/* Header */}
+      <section style={hero}>
+        <h1 style={heroTitle}>Forms & Prospectus</h1>
+        <div style={divider}></div>
+        <p style={heroText}>
+          Download admission prospectus and application forms for academic
+          programs.
+        </p>
+      </section>
 
-        <ul style={listStyle}>
-          <li style={listItemStyle}>
-            <span style={bulletStyle}>•</span>
-            <a href="#!" style={linkStyle} onClick={(e) => e.preventDefault()}>
-              Intermediate Prospectus 2025-26 (Coming Soon)
-            </a>
-          </li>
+      {/* Content */}
+      <div style={container}>
+        <div style={grid}>
 
-          <li style={listItemStyle}>
-            <span style={bulletStyle}>•</span>
-            <a href="#!" style={linkStyle} onClick={(e) => e.preventDefault()}>
-              ADP Prospectus 2025-26 (Coming Soon)
+          {/* Intermediate Prospectus */}
+          <div style={card}>
+            <FileText size={34} color="#1a237e" />
+
+            <h3 style={cardTitle}>Intermediate Prospectus 2025-26</h3>
+
+            <p style={cardDesc}>
+              Prospectus for F.Sc, ICS, FA and I.Com admission programs.
+            </p>
+
+            <a href={prospectusPDF} download style={downloadBtn}>
+              Download Prospectus
             </a>
-          </li>
-        </ul>
+          </div>
+
+          {/* ADP Prospectus */}
+          <div style={card}>
+            <FileText size={34} color="#1a237e" />
+
+            <h3 style={cardTitle}>ADP Prospectus 2025-26</h3>
+
+            <p style={cardDesc}>
+              Prospectus for Associate Degree Programs offered by the college.
+            </p>
+
+            <a href={prospectusPDF} download style={downloadBtn}>
+              Download Prospectus
+            </a>
+          </div>
+
+        </div>
+
+        {/* Note */}
+        <div style={noteBox}>
+          <strong>Note:</strong> Prospectus can be downloaded directly from the
+          buttons above.
+        </div>
       </div>
     </div>
   );
 };
 
-// --- STYLES ---
-const pageWrapper = {
+/* ---------------- STYLES ---------------- */
+
+const wrapper = {
   width: "100%",
-  minHeight: "80vh",
-  backgroundColor: "#fff",
+  minHeight: "100vh",
+  background: "#fff",
 };
 
-const contentArea = { padding: "40px 10%" };
-const headingStyle = {
-  fontSize: "30px",
-  color: "#333",
-  borderBottom: "1px solid #eee",
-  paddingBottom: "15px",
-  marginBottom: "25px",
+const hero = {
+  background: "#1a237e",
+  color: "white",
+  textAlign: "center",
+  padding: "70px 20px",
 };
-const listStyle = { listStyle: "none", padding: 0 };
-const listItemStyle = {
+
+const heroTitle = {
+  fontSize: "38px",
+  fontWeight: "800",
+};
+
+const heroText = {
+  marginTop: "10px",
+  opacity: "0.9",
+};
+
+const divider = {
+  width: "60px",
+  height: "4px",
+  background: "white",
+  margin: "18px auto",
+};
+
+const container = {
+  maxWidth: "1000px",
+  margin: "0 auto",
+  padding: "60px 20px",
+};
+
+const grid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+  gap: "30px",
+};
+
+const card = {
+  padding: "35px 30px",
+  border: "1px solid #eee",
+  borderRadius: "14px",
+  textAlign: "center",
+  boxShadow: "0 10px 25px rgba(0,0,0,0.06)",
   display: "flex",
+  flexDirection: "column",
   alignItems: "center",
-  marginBottom: "15px",
+  justifyContent: "space-between",
+  minHeight: "220px",
+  background: "#fff",
+  transition: "0.3s",
 };
-const bulletStyle = { color: "#1a237e", fontSize: "20px", marginRight: "10px" };
-const linkStyle = {
+
+const cardTitle = {
   color: "#1a237e",
-  textDecoration: "none",
+  marginTop: "12px",
+  marginBottom: "6px",
+  fontWeight: "700",
   fontSize: "18px",
-  fontWeight: "500",
-  cursor: "pointer",
+};
+
+const cardDesc = {
+  color: "#666",
+  fontSize: "15px",
+  lineHeight: "1.6",
+  maxWidth: "320px",
+};
+
+const downloadBtn = {
+  display: "inline-block",
+  marginTop: "20px",
+  padding: "11px 24px",
+  background: "#1a237e",
+  color: "#fff",
+  borderRadius: "6px",
+  textDecoration: "none",
+  fontSize: "14px",
+  fontWeight: "600",
+};
+
+const noteBox = {
+  marginTop: "40px",
+  padding: "18px",
+  background: "#f8faff",
+  borderLeft: "5px solid #1a237e",
+  borderRadius: "6px",
+  color: "#444",
 };
 
 export default ProspectusPage;
